@@ -5,7 +5,7 @@
 crow::json::wvalue getUsers() {
     crow::json::wvalue users;
     try {
-        pqxx::connection conn("dbname=game_db user=devuser password=devpassword host=localhost port=5432");
+        pqxx::connection conn("dbname=game_db user=devuser password=3567 host=localhost port=5432");
         pqxx::work txn(conn);
         pqxx::result result = txn.exec("SELECT user_id, username FROM user_account");
 
