@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package game;
+
+service GameService {
+  rpc GetUser (UserRequest) returns (UserResponse);
+  rpc AddUser (User) returns (ResponseMessage);
+  rpc UpdateScore (ScoreRequest) returns (ResponseMessage);
+  rpc StreamRankings (RankingRequest) returns (stream RankingResponse);
+}
+
+message UserRequest {
+  int32 user_id = 1;
+}
+
+message ScoreRequest {
+  int32 user_id = 1;
+  int32 score = 2;
+}
+
+message RankingRequest {
+  int32 top_n = 1;
+}
+
+message UserResponse {
+  int32 user_id = 1;
+  string username = 2;
+  int32 score = 3;
+}
+
+message ResponseMessage {
+  bool success = 1;
+  string message = 2;
+}
+
+message RankingResponse {
+  repeated UserResponse rankings = 1;
+}
+
+message User {
+  int32 user_id = 1;
+  string username = 2;
+  string email = 3;
+}
