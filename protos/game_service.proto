@@ -2,61 +2,68 @@ syntax = "proto3";
 
 package game;
 
+// 서비스 정의
 service GameService {
-  // 유저 정보를 가져오는 RPC
-  rpc GetUser(UserRequest) returns (UserResponse);
-  
-  // 유저를 추가하는 RPC
-  rpc AddUser(User) returns (ResponseMessage);
-  
-  // 점수를 업데이트하는 RPC
-  rpc UpdateScore(ScoreRequest) returns (ResponseMessage);
-  
-  // 랭킹을 스트리밍하는 RPC
-  rpc StreamRankings(RankingRequest) returns (stream RankingResponse);
+  // 유저 정보 조회
+  rpc GetUser (UserRequest) returns (UserResponse) {}
+  // 새 유저 추가
+  rpc AddUser (AddUserRequest) returns (AddUserResponse) {}
+  // 점수 업데이트
+  rpc UpdateScore (UpdateScoreRequest) returns (UpdateScoreResponse) {}
+  // 랭킹 조회
+  rpc GetRanking (RankingRequest) returns (RankingResponse) {}
 }
 
-// 유저 정보를 요청하는 메시지
+// 유저 정보 요청
 message UserRequest {
+  int32 user_id = 1;
+}
+
+// 유저 정보 응답
+message UserResponse {
+  int32 user_id = 1;
+  string username = 2;
+  int32 score = 3;
+  string created_at = 4;
+}
+
+// 새 유저 추가 요청
+message AddUserRequest {
   string username = 1;
-  int32 score = 2;
+}
+
+// 유저 추가 응답
+message AddUserResponse {
+  bool success = 1;
+  string message = 2;
   int32 user_id = 3;
 }
 
-// 유저 정보 응답 메시지
-message UserResponse {
-  string username = 1;
-  int32 score = 2;
-  string rank = 3;
-}
-
-// 유저 추가 요청 메시지
-message User {
-  string username = 1;
-  string email = 2;
-  int32 age = 3;
-}
-
-// 점수 업데이트 요청 메시지
-message ScoreRequest {
-  int64 user_id = 1;
+// 점수 업데이트 요청
+message UpdateScoreRequest {
+  int32 user_id = 1;
   int32 score = 2;
 }
 
-// 일반적인 응답 메시지
-message ResponseMessage {
+// 점수 업데이트 응답
+message UpdateScoreResponse {
   bool success = 1;
   string message = 2;
+  int32 new_score = 3;
 }
 
-// 랭킹 요청 메시지
+// 랭킹 요청
 message RankingRequest {
-  int32 top_n = 1;
+  int32 limit = 1; // 상위 몇 명을 조회할지
 }
 
-// 랭킹 응답 메시지
+// 랭킹 응답
 message RankingResponse {
-  string username = 1;
-  int32 score = 2;
-  int32 rank = 3;
+  message RankingEntry {
+    int32 rank = 1;
+    int32 user_id = 2;
+    string username = 3;
+    int32 score = 4;
+  }
+  repeated RankingEntry rankings = 1;
 }

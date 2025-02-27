@@ -31,9 +31,10 @@ inline constexpr UserResponse::Impl_::Impl_(
       : username_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        rank_(
+        created_at_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
+        user_id_{0},
         score_{0},
         _cached_size_{0} {}
 
@@ -59,11 +60,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 
 inline constexpr UserRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : username_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        score_{0},
-        user_id_{0},
+      : user_id_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -86,73 +83,17 @@ struct UserRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UserRequestDefaultTypeInternal _UserRequest_default_instance_;
 
-inline constexpr User::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : username_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        email_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        age_{0},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR User::User(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct UserDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR UserDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~UserDefaultTypeInternal() {}
-  union {
-    User _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UserDefaultTypeInternal _User_default_instance_;
-
-inline constexpr ScoreRequest::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : user_id_{::int64_t{0}},
-        score_{0},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR ScoreRequest::ScoreRequest(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct ScoreRequestDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ScoreRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ScoreRequestDefaultTypeInternal() {}
-  union {
-    ScoreRequest _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ScoreRequestDefaultTypeInternal _ScoreRequest_default_instance_;
-
-inline constexpr ResponseMessage::Impl_::Impl_(
+inline constexpr UpdateScoreResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : message_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         success_{false},
+        new_score_{0},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR ResponseMessage::ResponseMessage(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR UpdateScoreResponse::UpdateScoreResponse(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -160,28 +101,55 @@ PROTOBUF_CONSTEXPR ResponseMessage::ResponseMessage(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct ResponseMessageDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR ResponseMessageDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~ResponseMessageDefaultTypeInternal() {}
+struct UpdateScoreResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpdateScoreResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpdateScoreResponseDefaultTypeInternal() {}
   union {
-    ResponseMessage _instance;
+    UpdateScoreResponse _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ResponseMessageDefaultTypeInternal _ResponseMessage_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpdateScoreResponseDefaultTypeInternal _UpdateScoreResponse_default_instance_;
 
-inline constexpr RankingResponse::Impl_::Impl_(
+inline constexpr UpdateScoreRequest::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : user_id_{0},
+        score_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR UpdateScoreRequest::UpdateScoreRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct UpdateScoreRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UpdateScoreRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UpdateScoreRequestDefaultTypeInternal() {}
+  union {
+    UpdateScoreRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UpdateScoreRequestDefaultTypeInternal _UpdateScoreRequest_default_instance_;
+
+inline constexpr RankingResponse_RankingEntry::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : username_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        score_{0},
         rank_{0},
+        user_id_{0},
+        score_{0},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR RankingResponse::RankingResponse(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR RankingResponse_RankingEntry::RankingResponse_RankingEntry(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -189,20 +157,20 @@ PROTOBUF_CONSTEXPR RankingResponse::RankingResponse(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct RankingResponseDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR RankingResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~RankingResponseDefaultTypeInternal() {}
+struct RankingResponse_RankingEntryDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR RankingResponse_RankingEntryDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~RankingResponse_RankingEntryDefaultTypeInternal() {}
   union {
-    RankingResponse _instance;
+    RankingResponse_RankingEntry _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RankingResponseDefaultTypeInternal _RankingResponse_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RankingResponse_RankingEntryDefaultTypeInternal _RankingResponse_RankingEntry_default_instance_;
 
 inline constexpr RankingRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : top_n_{0},
+      : limit_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -224,6 +192,87 @@ struct RankingRequestDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RankingRequestDefaultTypeInternal _RankingRequest_default_instance_;
+
+inline constexpr AddUserResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : message_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        success_{false},
+        user_id_{0},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR AddUserResponse::AddUserResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct AddUserResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AddUserResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AddUserResponseDefaultTypeInternal() {}
+  union {
+    AddUserResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AddUserResponseDefaultTypeInternal _AddUserResponse_default_instance_;
+
+inline constexpr AddUserRequest::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : username_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR AddUserRequest::AddUserRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct AddUserRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AddUserRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AddUserRequestDefaultTypeInternal() {}
+  union {
+    AddUserRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AddUserRequestDefaultTypeInternal _AddUserRequest_default_instance_;
+
+inline constexpr RankingResponse::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : rankings_{},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR RankingResponse::RankingResponse(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct RankingResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR RankingResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~RankingResponseDefaultTypeInternal() {}
+  union {
+    RankingResponse _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RankingResponseDefaultTypeInternal _RankingResponse_default_instance_;
 }  // namespace game
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_game_5fservice_2eproto = nullptr;
@@ -240,8 +289,6 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::game::UserRequest, _impl_.username_),
-        PROTOBUF_FIELD_OFFSET(::game::UserRequest, _impl_.score_),
         PROTOBUF_FIELD_OFFSET(::game::UserRequest, _impl_.user_id_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::game::UserResponse, _internal_metadata_),
@@ -251,40 +298,51 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::game::UserResponse, _impl_.user_id_),
         PROTOBUF_FIELD_OFFSET(::game::UserResponse, _impl_.username_),
         PROTOBUF_FIELD_OFFSET(::game::UserResponse, _impl_.score_),
-        PROTOBUF_FIELD_OFFSET(::game::UserResponse, _impl_.rank_),
+        PROTOBUF_FIELD_OFFSET(::game::UserResponse, _impl_.created_at_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::game::User, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::game::AddUserRequest, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::game::User, _impl_.username_),
-        PROTOBUF_FIELD_OFFSET(::game::User, _impl_.email_),
-        PROTOBUF_FIELD_OFFSET(::game::User, _impl_.age_),
+        PROTOBUF_FIELD_OFFSET(::game::AddUserRequest, _impl_.username_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::game::ScoreRequest, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::game::AddUserResponse, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::game::ScoreRequest, _impl_.user_id_),
-        PROTOBUF_FIELD_OFFSET(::game::ScoreRequest, _impl_.score_),
+        PROTOBUF_FIELD_OFFSET(::game::AddUserResponse, _impl_.success_),
+        PROTOBUF_FIELD_OFFSET(::game::AddUserResponse, _impl_.message_),
+        PROTOBUF_FIELD_OFFSET(::game::AddUserResponse, _impl_.user_id_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::game::ResponseMessage, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreRequest, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::game::ResponseMessage, _impl_.success_),
-        PROTOBUF_FIELD_OFFSET(::game::ResponseMessage, _impl_.message_),
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreRequest, _impl_.user_id_),
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreRequest, _impl_.score_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreResponse, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreResponse, _impl_.success_),
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreResponse, _impl_.message_),
+        PROTOBUF_FIELD_OFFSET(::game::UpdateScoreResponse, _impl_.new_score_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::game::RankingRequest, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -293,7 +351,19 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::game::RankingRequest, _impl_.top_n_),
+        PROTOBUF_FIELD_OFFSET(::game::RankingRequest, _impl_.limit_),
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::game::RankingResponse_RankingEntry, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::game::RankingResponse_RankingEntry, _impl_.rank_),
+        PROTOBUF_FIELD_OFFSET(::game::RankingResponse_RankingEntry, _impl_.user_id_),
+        PROTOBUF_FIELD_OFFSET(::game::RankingResponse_RankingEntry, _impl_.username_),
+        PROTOBUF_FIELD_OFFSET(::game::RankingResponse_RankingEntry, _impl_.score_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::game::RankingResponse, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -302,61 +372,67 @@ const ::uint32_t
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::game::RankingResponse, _impl_.username_),
-        PROTOBUF_FIELD_OFFSET(::game::RankingResponse, _impl_.score_),
-        PROTOBUF_FIELD_OFFSET(::game::RankingResponse, _impl_.rank_),
+        PROTOBUF_FIELD_OFFSET(::game::RankingResponse, _impl_.rankings_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, -1, -1, sizeof(::game::UserRequest)},
-        {11, -1, -1, sizeof(::game::UserResponse)},
-        {22, -1, -1, sizeof(::game::User)},
-        {33, -1, -1, sizeof(::game::ScoreRequest)},
-        {43, -1, -1, sizeof(::game::ResponseMessage)},
-        {53, -1, -1, sizeof(::game::RankingRequest)},
-        {62, -1, -1, sizeof(::game::RankingResponse)},
+        {9, -1, -1, sizeof(::game::UserResponse)},
+        {21, -1, -1, sizeof(::game::AddUserRequest)},
+        {30, -1, -1, sizeof(::game::AddUserResponse)},
+        {41, -1, -1, sizeof(::game::UpdateScoreRequest)},
+        {51, -1, -1, sizeof(::game::UpdateScoreResponse)},
+        {62, -1, -1, sizeof(::game::RankingRequest)},
+        {71, -1, -1, sizeof(::game::RankingResponse_RankingEntry)},
+        {83, -1, -1, sizeof(::game::RankingResponse)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::game::_UserRequest_default_instance_._instance,
     &::game::_UserResponse_default_instance_._instance,
-    &::game::_User_default_instance_._instance,
-    &::game::_ScoreRequest_default_instance_._instance,
-    &::game::_ResponseMessage_default_instance_._instance,
+    &::game::_AddUserRequest_default_instance_._instance,
+    &::game::_AddUserResponse_default_instance_._instance,
+    &::game::_UpdateScoreRequest_default_instance_._instance,
+    &::game::_UpdateScoreResponse_default_instance_._instance,
     &::game::_RankingRequest_default_instance_._instance,
+    &::game::_RankingResponse_RankingEntry_default_instance_._instance,
     &::game::_RankingResponse_default_instance_._instance,
 };
 const char descriptor_table_protodef_game_5fservice_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\022game_service.proto\022\004game\"\?\n\013UserReques"
-    "t\022\020\n\010username\030\001 \001(\t\022\r\n\005score\030\002 \001(\005\022\017\n\007us"
-    "er_id\030\003 \001(\005\"=\n\014UserResponse\022\020\n\010username\030"
-    "\001 \001(\t\022\r\n\005score\030\002 \001(\005\022\014\n\004rank\030\003 \001(\t\"4\n\004Us"
-    "er\022\020\n\010username\030\001 \001(\t\022\r\n\005email\030\002 \001(\t\022\013\n\003a"
-    "ge\030\003 \001(\005\".\n\014ScoreRequest\022\017\n\007user_id\030\001 \001("
-    "\003\022\r\n\005score\030\002 \001(\005\"3\n\017ResponseMessage\022\017\n\007s"
-    "uccess\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"\037\n\016Ranking"
-    "Request\022\r\n\005top_n\030\001 \001(\005\"@\n\017RankingRespons"
-    "e\022\020\n\010username\030\001 \001(\t\022\r\n\005score\030\002 \001(\005\022\014\n\004ra"
-    "nk\030\003 \001(\0052\350\001\n\013GameService\0220\n\007GetUser\022\021.ga"
-    "me.UserRequest\032\022.game.UserResponse\022,\n\007Ad"
-    "dUser\022\n.game.User\032\025.game.ResponseMessage"
-    "\0228\n\013UpdateScore\022\022.game.ScoreRequest\032\025.ga"
-    "me.ResponseMessage\022\?\n\016StreamRankings\022\024.g"
-    "ame.RankingRequest\032\025.game.RankingRespons"
-    "e0\001b\006proto3"
+    "\n\022game_service.proto\022\004game\"\036\n\013UserReques"
+    "t\022\017\n\007user_id\030\001 \001(\005\"T\n\014UserResponse\022\017\n\007us"
+    "er_id\030\001 \001(\005\022\020\n\010username\030\002 \001(\t\022\r\n\005score\030\003"
+    " \001(\005\022\022\n\ncreated_at\030\004 \001(\t\"\"\n\016AddUserReque"
+    "st\022\020\n\010username\030\001 \001(\t\"D\n\017AddUserResponse\022"
+    "\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\022\017\n\007use"
+    "r_id\030\003 \001(\005\"4\n\022UpdateScoreRequest\022\017\n\007user"
+    "_id\030\001 \001(\005\022\r\n\005score\030\002 \001(\005\"J\n\023UpdateScoreR"
+    "esponse\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001("
+    "\t\022\021\n\tnew_score\030\003 \001(\005\"\037\n\016RankingRequest\022\r"
+    "\n\005limit\030\001 \001(\005\"\227\001\n\017RankingResponse\0224\n\010ran"
+    "kings\030\001 \003(\0132\".game.RankingResponse.Ranki"
+    "ngEntry\032N\n\014RankingEntry\022\014\n\004rank\030\001 \001(\005\022\017\n"
+    "\007user_id\030\002 \001(\005\022\020\n\010username\030\003 \001(\t\022\r\n\005scor"
+    "e\030\004 \001(\0052\376\001\n\013GameService\0222\n\007GetUser\022\021.gam"
+    "e.UserRequest\032\022.game.UserResponse\"\000\0228\n\007A"
+    "ddUser\022\024.game.AddUserRequest\032\025.game.AddU"
+    "serResponse\"\000\022D\n\013UpdateScore\022\030.game.Upda"
+    "teScoreRequest\032\031.game.UpdateScoreRespons"
+    "e\"\000\022;\n\nGetRanking\022\024.game.RankingRequest\032"
+    "\025.game.RankingResponse\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_game_5fservice_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_game_5fservice_2eproto = {
     false,
     false,
-    651,
+    832,
     descriptor_table_protodef_game_5fservice_2eproto,
     "game_service.proto",
     &descriptor_table_game_5fservice_2eproto_once,
     nullptr,
     0,
-    7,
+    9,
     schemas,
     file_default_instances,
     TableStruct_game_5fservice_2eproto::offsets,
@@ -379,49 +455,19 @@ UserRequest::UserRequest(::google::protobuf::Arena* arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:game.UserRequest)
 }
-inline PROTOBUF_NDEBUG_INLINE UserRequest::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::game::UserRequest& from_msg)
-      : username_(arena, from.username_),
-        _cached_size_{0} {}
-
 UserRequest::UserRequest(
-    ::google::protobuf::Arena* arena,
-    const UserRequest& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  UserRequest* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, score_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, score_),
-           offsetof(Impl_, user_id_) -
-               offsetof(Impl_, score_) +
-               sizeof(Impl_::user_id_));
-
-  // @@protoc_insertion_point(copy_constructor:game.UserRequest)
+    ::google::protobuf::Arena* arena, const UserRequest& from)
+    : UserRequest(arena) {
+  MergeFrom(from);
 }
 inline PROTOBUF_NDEBUG_INLINE UserRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : username_(arena),
-        _cached_size_{0} {}
+      : _cached_size_{0} {}
 
 inline void UserRequest::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, score_),
-           0,
-           offsetof(Impl_, user_id_) -
-               offsetof(Impl_, score_) +
-               sizeof(Impl_::user_id_));
+  _impl_.user_id_ = {};
 }
 UserRequest::~UserRequest() {
   // @@protoc_insertion_point(destructor:game.UserRequest)
@@ -431,7 +477,6 @@ inline void UserRequest::SharedDtor(MessageLite& self) {
   UserRequest& this_ = static_cast<UserRequest&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.username_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -440,7 +485,7 @@ inline void* UserRequest::PlacementNew_(const void*, void* mem,
   return ::new (mem) UserRequest(arena);
 }
 constexpr auto UserRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(UserRequest),
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(UserRequest),
                                             alignof(UserRequest));
 }
 PROTOBUF_CONSTINIT
@@ -471,15 +516,15 @@ const ::google::protobuf::internal::ClassData* UserRequest::GetClassData() const
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 33, 2> UserRequest::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> UserRequest::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -489,34 +534,18 @@ const ::_pbi::TcParseTable<2, 3, 0, 33, 2> UserRequest::_table_ = {
     ::_pbi::TcParser::GetTable<::game::UserRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // string username = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.username_)}},
-    // int32 score = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UserRequest, _impl_.score_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.score_)}},
-    // int32 user_id = 3;
+    // int32 user_id = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UserRequest, _impl_.user_id_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.user_id_)}},
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.user_id_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // string username = 1;
-    {PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.username_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int32 score = 2;
-    {PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.score_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 user_id = 3;
+    // int32 user_id = 1;
     {PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.user_id_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
   {{
-    "\20\10\0\0\0\0\0\0"
-    "game.UserRequest"
-    "username"
   }},
 };
 
@@ -527,10 +556,7 @@ PROTOBUF_NOINLINE void UserRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.username_.ClearToEmpty();
-  ::memset(&_impl_.score_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.user_id_) -
-      reinterpret_cast<char*>(&_impl_.score_)) + sizeof(_impl_.user_id_));
+  _impl_.user_id_ = 0;
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -549,25 +575,10 @@ PROTOBUF_NOINLINE void UserRequest::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // string username = 1;
-          if (!this_._internal_username().empty()) {
-            const std::string& _s = this_._internal_username();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.UserRequest.username");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // int32 score = 2;
-          if (this_._internal_score() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
-                    stream, this_._internal_score(), target);
-          }
-
-          // int32 user_id = 3;
+          // int32 user_id = 1;
           if (this_._internal_user_id() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<3>(
+                WriteInt32ToArrayWithField<1>(
                     stream, this_._internal_user_id(), target);
           }
 
@@ -594,19 +605,8 @@ PROTOBUF_NOINLINE void UserRequest::Clear() {
           // Prevent compiler warnings about cached_has_bits being unused
           (void)cached_has_bits;
 
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // string username = 1;
-            if (!this_._internal_username().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_username());
-            }
-            // int32 score = 2;
-            if (this_._internal_score() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_score());
-            }
-            // int32 user_id = 3;
+            // int32 user_id = 1;
             if (this_._internal_user_id() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_user_id());
@@ -624,12 +624,6 @@ void UserRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_username().empty()) {
-    _this->_internal_set_username(from._internal_username());
-  }
-  if (from._internal_score() != 0) {
-    _this->_impl_.score_ = from._impl_.score_;
-  }
   if (from._internal_user_id() != 0) {
     _this->_impl_.user_id_ = from._impl_.user_id_;
   }
@@ -646,16 +640,8 @@ void UserRequest::CopyFrom(const UserRequest& from) {
 
 void UserRequest::InternalSwap(UserRequest* PROTOBUF_RESTRICT other) {
   using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.user_id_)
-      + sizeof(UserRequest::_impl_.user_id_)
-      - PROTOBUF_FIELD_OFFSET(UserRequest, _impl_.score_)>(
-          reinterpret_cast<char*>(&_impl_.score_),
-          reinterpret_cast<char*>(&other->_impl_.score_));
+        swap(_impl_.user_id_, other->_impl_.user_id_);
 }
 
 ::google::protobuf::Metadata UserRequest::GetMetadata() const {
@@ -680,7 +666,7 @@ inline PROTOBUF_NDEBUG_INLINE UserResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::game::UserResponse& from_msg)
       : username_(arena, from.username_),
-        rank_(arena, from.rank_),
+        created_at_(arena, from.created_at_),
         _cached_size_{0} {}
 
 UserResponse::UserResponse(
@@ -696,7 +682,13 @@ UserResponse::UserResponse(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.score_ = from._impl_.score_;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, user_id_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, user_id_),
+           offsetof(Impl_, score_) -
+               offsetof(Impl_, user_id_) +
+               sizeof(Impl_::score_));
 
   // @@protoc_insertion_point(copy_constructor:game.UserResponse)
 }
@@ -704,12 +696,17 @@ inline PROTOBUF_NDEBUG_INLINE UserResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : username_(arena),
-        rank_(arena),
+        created_at_(arena),
         _cached_size_{0} {}
 
 inline void UserResponse::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.score_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, user_id_),
+           0,
+           offsetof(Impl_, score_) -
+               offsetof(Impl_, user_id_) +
+               sizeof(Impl_::score_));
 }
 UserResponse::~UserResponse() {
   // @@protoc_insertion_point(destructor:game.UserResponse)
@@ -720,7 +717,7 @@ inline void UserResponse::SharedDtor(MessageLite& self) {
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.username_.Destroy();
-  this_._impl_.rank_.Destroy();
+  this_._impl_.created_at_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -760,15 +757,15 @@ const ::google::protobuf::internal::ClassData* UserResponse::GetClassData() cons
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 38, 2> UserResponse::_table_ = {
+const ::_pbi::TcParseTable<2, 4, 0, 44, 2> UserResponse::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    4, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967280,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    4,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
@@ -778,35 +775,40 @@ const ::_pbi::TcParseTable<2, 3, 0, 38, 2> UserResponse::_table_ = {
     ::_pbi::TcParser::GetTable<::game::UserResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // string username = 1;
+    // string created_at = 4;
     {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.username_)}},
-    // int32 score = 2;
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.created_at_)}},
+    // int32 user_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UserResponse, _impl_.user_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.user_id_)}},
+    // string username = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.username_)}},
+    // int32 score = 3;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UserResponse, _impl_.score_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.score_)}},
-    // string rank = 3;
-    {::_pbi::TcParser::FastUS1,
-     {26, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.rank_)}},
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.score_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // string username = 1;
+    // int32 user_id = 1;
+    {PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.user_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string username = 2;
     {PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.username_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int32 score = 2;
+    // int32 score = 3;
     {PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.score_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // string rank = 3;
-    {PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.rank_), 0, 0,
+    // string created_at = 4;
+    {PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.created_at_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\21\10\0\4\0\0\0\0"
+    "\21\0\10\0\12\0\0\0"
     "game.UserResponse"
     "username"
-    "rank"
+    "created_at"
   }},
 };
 
@@ -818,8 +820,10 @@ PROTOBUF_NOINLINE void UserResponse::Clear() {
   (void) cached_has_bits;
 
   _impl_.username_.ClearToEmpty();
-  _impl_.rank_.ClearToEmpty();
-  _impl_.score_ = 0;
+  _impl_.created_at_.ClearToEmpty();
+  ::memset(&_impl_.user_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.score_) -
+      reinterpret_cast<char*>(&_impl_.user_id_)) + sizeof(_impl_.score_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -838,27 +842,34 @@ PROTOBUF_NOINLINE void UserResponse::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // string username = 1;
+          // int32 user_id = 1;
+          if (this_._internal_user_id() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_user_id(), target);
+          }
+
+          // string username = 2;
           if (!this_._internal_username().empty()) {
             const std::string& _s = this_._internal_username();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
                 _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.UserResponse.username");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
+            target = stream->WriteStringMaybeAliased(2, _s, target);
           }
 
-          // int32 score = 2;
+          // int32 score = 3;
           if (this_._internal_score() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
+                WriteInt32ToArrayWithField<3>(
                     stream, this_._internal_score(), target);
           }
 
-          // string rank = 3;
-          if (!this_._internal_rank().empty()) {
-            const std::string& _s = this_._internal_rank();
+          // string created_at = 4;
+          if (!this_._internal_created_at().empty()) {
+            const std::string& _s = this_._internal_created_at();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.UserResponse.rank");
-            target = stream->WriteStringMaybeAliased(3, _s, target);
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.UserResponse.created_at");
+            target = stream->WriteStringMaybeAliased(4, _s, target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -886,17 +897,22 @@ PROTOBUF_NOINLINE void UserResponse::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // string username = 1;
+            // string username = 2;
             if (!this_._internal_username().empty()) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
                                               this_._internal_username());
             }
-            // string rank = 3;
-            if (!this_._internal_rank().empty()) {
+            // string created_at = 4;
+            if (!this_._internal_created_at().empty()) {
               total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_rank());
+                                              this_._internal_created_at());
             }
-            // int32 score = 2;
+            // int32 user_id = 1;
+            if (this_._internal_user_id() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_user_id());
+            }
+            // int32 score = 3;
             if (this_._internal_score() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
                   this_._internal_score());
@@ -917,8 +933,11 @@ void UserResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::go
   if (!from._internal_username().empty()) {
     _this->_internal_set_username(from._internal_username());
   }
-  if (!from._internal_rank().empty()) {
-    _this->_internal_set_rank(from._internal_rank());
+  if (!from._internal_created_at().empty()) {
+    _this->_internal_set_created_at(from._internal_created_at());
+  }
+  if (from._internal_user_id() != 0) {
+    _this->_impl_.user_id_ = from._impl_.user_id_;
   }
   if (from._internal_score() != 0) {
     _this->_impl_.score_ = from._impl_.score_;
@@ -940,8 +959,13 @@ void UserResponse::InternalSwap(UserResponse* PROTOBUF_RESTRICT other) {
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.rank_, &other->_impl_.rank_, arena);
-        swap(_impl_.score_, other->_impl_.score_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.created_at_, &other->_impl_.created_at_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.score_)
+      + sizeof(UserResponse::_impl_.score_)
+      - PROTOBUF_FIELD_OFFSET(UserResponse, _impl_.user_id_)>(
+          reinterpret_cast<char*>(&_impl_.user_id_),
+          reinterpret_cast<char*>(&other->_impl_.user_id_));
 }
 
 ::google::protobuf::Metadata UserResponse::GetMetadata() const {
@@ -949,104 +973,343 @@ void UserResponse::InternalSwap(UserResponse* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
-class User::_Internal {
+class AddUserRequest::_Internal {
  public:
 };
 
-User::User(::google::protobuf::Arena* arena)
+AddUserRequest::AddUserRequest(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:game.User)
+  // @@protoc_insertion_point(arena_constructor:game.AddUserRequest)
 }
-inline PROTOBUF_NDEBUG_INLINE User::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE AddUserRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::game::User& from_msg)
+    const Impl_& from, const ::game::AddUserRequest& from_msg)
       : username_(arena, from.username_),
-        email_(arena, from.email_),
         _cached_size_{0} {}
 
-User::User(
+AddUserRequest::AddUserRequest(
     ::google::protobuf::Arena* arena,
-    const User& from)
+    const AddUserRequest& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  User* const _this = this;
+  AddUserRequest* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.age_ = from._impl_.age_;
 
-  // @@protoc_insertion_point(copy_constructor:game.User)
+  // @@protoc_insertion_point(copy_constructor:game.AddUserRequest)
 }
-inline PROTOBUF_NDEBUG_INLINE User::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE AddUserRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : username_(arena),
-        email_(arena),
         _cached_size_{0} {}
 
-inline void User::SharedCtor(::_pb::Arena* arena) {
+inline void AddUserRequest::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.age_ = {};
 }
-User::~User() {
-  // @@protoc_insertion_point(destructor:game.User)
+AddUserRequest::~AddUserRequest() {
+  // @@protoc_insertion_point(destructor:game.AddUserRequest)
   SharedDtor(*this);
 }
-inline void User::SharedDtor(MessageLite& self) {
-  User& this_ = static_cast<User&>(self);
+inline void AddUserRequest::SharedDtor(MessageLite& self) {
+  AddUserRequest& this_ = static_cast<AddUserRequest&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.username_.Destroy();
-  this_._impl_.email_.Destroy();
   this_._impl_.~Impl_();
 }
 
-inline void* User::PlacementNew_(const void*, void* mem,
+inline void* AddUserRequest::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) User(arena);
+  return ::new (mem) AddUserRequest(arena);
 }
-constexpr auto User::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(User),
-                                            alignof(User));
+constexpr auto AddUserRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(AddUserRequest),
+                                            alignof(AddUserRequest));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull User::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull AddUserRequest::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_User_default_instance_._instance,
+        &_AddUserRequest_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &User::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<User>(),
+        &AddUserRequest::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<AddUserRequest>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &User::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<User>(), &User::ByteSizeLong,
-            &User::_InternalSerialize,
+        &AddUserRequest::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<AddUserRequest>(), &AddUserRequest::ByteSizeLong,
+            &AddUserRequest::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(User, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(AddUserRequest, _impl_._cached_size_),
         false,
     },
-    &User::kDescriptorMethods,
+    &AddUserRequest::kDescriptorMethods,
     &descriptor_table_game_5fservice_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* User::GetClassData() const {
+const ::google::protobuf::internal::ClassData* AddUserRequest::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 31, 2> User::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 36, 2> AddUserRequest::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::game::AddUserRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // string username = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(AddUserRequest, _impl_.username_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string username = 1;
+    {PROTOBUF_FIELD_OFFSET(AddUserRequest, _impl_.username_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\23\10\0\0\0\0\0\0"
+    "game.AddUserRequest"
+    "username"
+  }},
+};
+
+PROTOBUF_NOINLINE void AddUserRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.AddUserRequest)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.username_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* AddUserRequest::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const AddUserRequest& this_ = static_cast<const AddUserRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* AddUserRequest::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const AddUserRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:game.AddUserRequest)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string username = 1;
+          if (!this_._internal_username().empty()) {
+            const std::string& _s = this_._internal_username();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.AddUserRequest.username");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:game.AddUserRequest)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t AddUserRequest::ByteSizeLong(const MessageLite& base) {
+          const AddUserRequest& this_ = static_cast<const AddUserRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t AddUserRequest::ByteSizeLong() const {
+          const AddUserRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:game.AddUserRequest)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+           {
+            // string username = 1;
+            if (!this_._internal_username().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_username());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void AddUserRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<AddUserRequest*>(&to_msg);
+  auto& from = static_cast<const AddUserRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.AddUserRequest)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_username().empty()) {
+    _this->_internal_set_username(from._internal_username());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void AddUserRequest::CopyFrom(const AddUserRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.AddUserRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void AddUserRequest::InternalSwap(AddUserRequest* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
+}
+
+::google::protobuf::Metadata AddUserRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class AddUserResponse::_Internal {
+ public:
+};
+
+AddUserResponse::AddUserResponse(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:game.AddUserResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE AddUserResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::game::AddUserResponse& from_msg)
+      : message_(arena, from.message_),
+        _cached_size_{0} {}
+
+AddUserResponse::AddUserResponse(
+    ::google::protobuf::Arena* arena,
+    const AddUserResponse& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  AddUserResponse* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, success_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, success_),
+           offsetof(Impl_, user_id_) -
+               offsetof(Impl_, success_) +
+               sizeof(Impl_::user_id_));
+
+  // @@protoc_insertion_point(copy_constructor:game.AddUserResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE AddUserResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : message_(arena),
+        _cached_size_{0} {}
+
+inline void AddUserResponse::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, success_),
+           0,
+           offsetof(Impl_, user_id_) -
+               offsetof(Impl_, success_) +
+               sizeof(Impl_::user_id_));
+}
+AddUserResponse::~AddUserResponse() {
+  // @@protoc_insertion_point(destructor:game.AddUserResponse)
+  SharedDtor(*this);
+}
+inline void AddUserResponse::SharedDtor(MessageLite& self) {
+  AddUserResponse& this_ = static_cast<AddUserResponse&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.message_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* AddUserResponse::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) AddUserResponse(arena);
+}
+constexpr auto AddUserResponse::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(AddUserResponse),
+                                            alignof(AddUserResponse));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull AddUserResponse::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_AddUserResponse_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &AddUserResponse::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<AddUserResponse>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &AddUserResponse::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<AddUserResponse>(), &AddUserResponse::ByteSizeLong,
+            &AddUserResponse::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_._cached_size_),
+        false,
+    },
+    &AddUserResponse::kDescriptorMethods,
+    &descriptor_table_game_5fservice_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* AddUserResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 36, 2> AddUserResponse::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -1061,581 +1324,66 @@ const ::_pbi::TcParseTable<2, 3, 0, 31, 2> User::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::game::User>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::game::AddUserResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // string username = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.username_)}},
-    // string email = 2;
-    {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.email_)}},
-    // int32 age = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(User, _impl_.age_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.age_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // string username = 1;
-    {PROTOBUF_FIELD_OFFSET(User, _impl_.username_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // string email = 2;
-    {PROTOBUF_FIELD_OFFSET(User, _impl_.email_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int32 age = 3;
-    {PROTOBUF_FIELD_OFFSET(User, _impl_.age_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-    "\11\10\5\0\0\0\0\0"
-    "game.User"
-    "username"
-    "email"
-  }},
-};
-
-PROTOBUF_NOINLINE void User::Clear() {
-// @@protoc_insertion_point(message_clear_start:game.User)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.username_.ClearToEmpty();
-  _impl_.email_.ClearToEmpty();
-  _impl_.age_ = 0;
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* User::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const User& this_ = static_cast<const User&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* User::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const User& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:game.User)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // string username = 1;
-          if (!this_._internal_username().empty()) {
-            const std::string& _s = this_._internal_username();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.User.username");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // string email = 2;
-          if (!this_._internal_email().empty()) {
-            const std::string& _s = this_._internal_email();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.User.email");
-            target = stream->WriteStringMaybeAliased(2, _s, target);
-          }
-
-          // int32 age = 3;
-          if (this_._internal_age() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<3>(
-                    stream, this_._internal_age(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:game.User)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t User::ByteSizeLong(const MessageLite& base) {
-          const User& this_ = static_cast<const User&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t User::ByteSizeLong() const {
-          const User& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:game.User)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // string username = 1;
-            if (!this_._internal_username().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_username());
-            }
-            // string email = 2;
-            if (!this_._internal_email().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_email());
-            }
-            // int32 age = 3;
-            if (this_._internal_age() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_age());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void User::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<User*>(&to_msg);
-  auto& from = static_cast<const User&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:game.User)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_username().empty()) {
-    _this->_internal_set_username(from._internal_username());
-  }
-  if (!from._internal_email().empty()) {
-    _this->_internal_set_email(from._internal_email());
-  }
-  if (from._internal_age() != 0) {
-    _this->_impl_.age_ = from._impl_.age_;
-  }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void User::CopyFrom(const User& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:game.User)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void User::InternalSwap(User* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.email_, &other->_impl_.email_, arena);
-        swap(_impl_.age_, other->_impl_.age_);
-}
-
-::google::protobuf::Metadata User::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class ScoreRequest::_Internal {
- public:
-};
-
-ScoreRequest::ScoreRequest(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:game.ScoreRequest)
-}
-ScoreRequest::ScoreRequest(
-    ::google::protobuf::Arena* arena, const ScoreRequest& from)
-    : ScoreRequest(arena) {
-  MergeFrom(from);
-}
-inline PROTOBUF_NDEBUG_INLINE ScoreRequest::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : _cached_size_{0} {}
-
-inline void ScoreRequest::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, user_id_),
-           0,
-           offsetof(Impl_, score_) -
-               offsetof(Impl_, user_id_) +
-               sizeof(Impl_::score_));
-}
-ScoreRequest::~ScoreRequest() {
-  // @@protoc_insertion_point(destructor:game.ScoreRequest)
-  SharedDtor(*this);
-}
-inline void ScoreRequest::SharedDtor(MessageLite& self) {
-  ScoreRequest& this_ = static_cast<ScoreRequest&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* ScoreRequest::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) ScoreRequest(arena);
-}
-constexpr auto ScoreRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(ScoreRequest),
-                                            alignof(ScoreRequest));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull ScoreRequest::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_ScoreRequest_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &ScoreRequest::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<ScoreRequest>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &ScoreRequest::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<ScoreRequest>(), &ScoreRequest::ByteSizeLong,
-            &ScoreRequest::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_._cached_size_),
-        false,
-    },
-    &ScoreRequest::kDescriptorMethods,
-    &descriptor_table_game_5fservice_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* ScoreRequest::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 0, 2> ScoreRequest::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::game::ScoreRequest>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // int32 score = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ScoreRequest, _impl_.score_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_.score_)}},
-    // int64 user_id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(ScoreRequest, _impl_.user_id_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_.user_id_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // int64 user_id = 1;
-    {PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_.user_id_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
-    // int32 score = 2;
-    {PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_.score_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
-
-PROTOBUF_NOINLINE void ScoreRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:game.ScoreRequest)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  ::memset(&_impl_.user_id_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.score_) -
-      reinterpret_cast<char*>(&_impl_.user_id_)) + sizeof(_impl_.score_));
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* ScoreRequest::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const ScoreRequest& this_ = static_cast<const ScoreRequest&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* ScoreRequest::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const ScoreRequest& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:game.ScoreRequest)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // int64 user_id = 1;
-          if (this_._internal_user_id() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt64ToArrayWithField<1>(
-                    stream, this_._internal_user_id(), target);
-          }
-
-          // int32 score = 2;
-          if (this_._internal_score() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
-                    stream, this_._internal_score(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:game.ScoreRequest)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t ScoreRequest::ByteSizeLong(const MessageLite& base) {
-          const ScoreRequest& this_ = static_cast<const ScoreRequest&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ScoreRequest::ByteSizeLong() const {
-          const ScoreRequest& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:game.ScoreRequest)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // int64 user_id = 1;
-            if (this_._internal_user_id() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
-                  this_._internal_user_id());
-            }
-            // int32 score = 2;
-            if (this_._internal_score() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_score());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void ScoreRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<ScoreRequest*>(&to_msg);
-  auto& from = static_cast<const ScoreRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:game.ScoreRequest)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from._internal_user_id() != 0) {
-    _this->_impl_.user_id_ = from._impl_.user_id_;
-  }
-  if (from._internal_score() != 0) {
-    _this->_impl_.score_ = from._impl_.score_;
-  }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void ScoreRequest::CopyFrom(const ScoreRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:game.ScoreRequest)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void ScoreRequest::InternalSwap(ScoreRequest* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_.score_)
-      + sizeof(ScoreRequest::_impl_.score_)
-      - PROTOBUF_FIELD_OFFSET(ScoreRequest, _impl_.user_id_)>(
-          reinterpret_cast<char*>(&_impl_.user_id_),
-          reinterpret_cast<char*>(&other->_impl_.user_id_));
-}
-
-::google::protobuf::Metadata ScoreRequest::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class ResponseMessage::_Internal {
- public:
-};
-
-ResponseMessage::ResponseMessage(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:game.ResponseMessage)
-}
-inline PROTOBUF_NDEBUG_INLINE ResponseMessage::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::game::ResponseMessage& from_msg)
-      : message_(arena, from.message_),
-        _cached_size_{0} {}
-
-ResponseMessage::ResponseMessage(
-    ::google::protobuf::Arena* arena,
-    const ResponseMessage& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  ResponseMessage* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.success_ = from._impl_.success_;
-
-  // @@protoc_insertion_point(copy_constructor:game.ResponseMessage)
-}
-inline PROTOBUF_NDEBUG_INLINE ResponseMessage::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : message_(arena),
-        _cached_size_{0} {}
-
-inline void ResponseMessage::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.success_ = {};
-}
-ResponseMessage::~ResponseMessage() {
-  // @@protoc_insertion_point(destructor:game.ResponseMessage)
-  SharedDtor(*this);
-}
-inline void ResponseMessage::SharedDtor(MessageLite& self) {
-  ResponseMessage& this_ = static_cast<ResponseMessage&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.message_.Destroy();
-  this_._impl_.~Impl_();
-}
-
-inline void* ResponseMessage::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) ResponseMessage(arena);
-}
-constexpr auto ResponseMessage::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(ResponseMessage),
-                                            alignof(ResponseMessage));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull ResponseMessage::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_ResponseMessage_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &ResponseMessage::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<ResponseMessage>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &ResponseMessage::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<ResponseMessage>(), &ResponseMessage::ByteSizeLong,
-            &ResponseMessage::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(ResponseMessage, _impl_._cached_size_),
-        false,
-    },
-    &ResponseMessage::kDescriptorMethods,
-    &descriptor_table_game_5fservice_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* ResponseMessage::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 36, 2> ResponseMessage::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::game::ResponseMessage>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(AddUserResponse, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.success_)}},
     // string message = 2;
     {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ResponseMessage, _impl_.message_)}},
-    // bool success = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(ResponseMessage, _impl_.success_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(ResponseMessage, _impl_.success_)}},
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.message_)}},
+    // int32 user_id = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(AddUserResponse, _impl_.user_id_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.user_id_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool success = 1;
-    {PROTOBUF_FIELD_OFFSET(ResponseMessage, _impl_.success_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.success_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBool)},
     // string message = 2;
-    {PROTOBUF_FIELD_OFFSET(ResponseMessage, _impl_.message_), 0, 0,
+    {PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.message_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 user_id = 3;
+    {PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.user_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
   {{
     "\24\0\7\0\0\0\0\0"
-    "game.ResponseMessage"
+    "game.AddUserResponse"
     "message"
   }},
 };
 
-PROTOBUF_NOINLINE void ResponseMessage::Clear() {
-// @@protoc_insertion_point(message_clear_start:game.ResponseMessage)
+PROTOBUF_NOINLINE void AddUserResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.AddUserResponse)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _impl_.message_.ClearToEmpty();
-  _impl_.success_ = false;
+  ::memset(&_impl_.success_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.user_id_) -
+      reinterpret_cast<char*>(&_impl_.success_)) + sizeof(_impl_.user_id_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* ResponseMessage::_InternalSerialize(
+        ::uint8_t* AddUserResponse::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const ResponseMessage& this_ = static_cast<const ResponseMessage&>(base);
+          const AddUserResponse& this_ = static_cast<const AddUserResponse&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* ResponseMessage::_InternalSerialize(
+        ::uint8_t* AddUserResponse::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const ResponseMessage& this_ = *this;
+          const AddUserResponse& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:game.ResponseMessage)
+          // @@protoc_insertion_point(serialize_to_array_start:game.AddUserResponse)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
@@ -1650,8 +1398,15 @@ PROTOBUF_NOINLINE void ResponseMessage::Clear() {
           if (!this_._internal_message().empty()) {
             const std::string& _s = this_._internal_message();
             ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.ResponseMessage.message");
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.AddUserResponse.message");
             target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          // int32 user_id = 3;
+          if (this_._internal_user_id() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_user_id(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1659,18 +1414,18 @@ PROTOBUF_NOINLINE void ResponseMessage::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:game.ResponseMessage)
+          // @@protoc_insertion_point(serialize_to_array_end:game.AddUserResponse)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t ResponseMessage::ByteSizeLong(const MessageLite& base) {
-          const ResponseMessage& this_ = static_cast<const ResponseMessage&>(base);
+        ::size_t AddUserResponse::ByteSizeLong(const MessageLite& base) {
+          const AddUserResponse& this_ = static_cast<const AddUserResponse&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t ResponseMessage::ByteSizeLong() const {
-          const ResponseMessage& this_ = *this;
+        ::size_t AddUserResponse::ByteSizeLong() const {
+          const AddUserResponse& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:game.ResponseMessage)
+          // @@protoc_insertion_point(message_byte_size_start:game.AddUserResponse)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -1688,15 +1443,20 @@ PROTOBUF_NOINLINE void ResponseMessage::Clear() {
             if (this_._internal_success() != 0) {
               total_size += 2;
             }
+            // int32 user_id = 3;
+            if (this_._internal_user_id() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_user_id());
+            }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
 
-void ResponseMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<ResponseMessage*>(&to_msg);
-  auto& from = static_cast<const ResponseMessage&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:game.ResponseMessage)
+void AddUserResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<AddUserResponse*>(&to_msg);
+  auto& from = static_cast<const AddUserResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.AddUserResponse)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1707,27 +1467,572 @@ void ResponseMessage::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
   if (from._internal_success() != 0) {
     _this->_impl_.success_ = from._impl_.success_;
   }
+  if (from._internal_user_id() != 0) {
+    _this->_impl_.user_id_ = from._impl_.user_id_;
+  }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void ResponseMessage::CopyFrom(const ResponseMessage& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:game.ResponseMessage)
+void AddUserResponse::CopyFrom(const AddUserResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.AddUserResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void ResponseMessage::InternalSwap(ResponseMessage* PROTOBUF_RESTRICT other) {
+void AddUserResponse::InternalSwap(AddUserResponse* PROTOBUF_RESTRICT other) {
   using std::swap;
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.message_, &other->_impl_.message_, arena);
-        swap(_impl_.success_, other->_impl_.success_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.user_id_)
+      + sizeof(AddUserResponse::_impl_.user_id_)
+      - PROTOBUF_FIELD_OFFSET(AddUserResponse, _impl_.success_)>(
+          reinterpret_cast<char*>(&_impl_.success_),
+          reinterpret_cast<char*>(&other->_impl_.success_));
 }
 
-::google::protobuf::Metadata ResponseMessage::GetMetadata() const {
+::google::protobuf::Metadata AddUserResponse::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class UpdateScoreRequest::_Internal {
+ public:
+};
+
+UpdateScoreRequest::UpdateScoreRequest(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:game.UpdateScoreRequest)
+}
+UpdateScoreRequest::UpdateScoreRequest(
+    ::google::protobuf::Arena* arena, const UpdateScoreRequest& from)
+    : UpdateScoreRequest(arena) {
+  MergeFrom(from);
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateScoreRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
+
+inline void UpdateScoreRequest::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, user_id_),
+           0,
+           offsetof(Impl_, score_) -
+               offsetof(Impl_, user_id_) +
+               sizeof(Impl_::score_));
+}
+UpdateScoreRequest::~UpdateScoreRequest() {
+  // @@protoc_insertion_point(destructor:game.UpdateScoreRequest)
+  SharedDtor(*this);
+}
+inline void UpdateScoreRequest::SharedDtor(MessageLite& self) {
+  UpdateScoreRequest& this_ = static_cast<UpdateScoreRequest&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* UpdateScoreRequest::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) UpdateScoreRequest(arena);
+}
+constexpr auto UpdateScoreRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(UpdateScoreRequest),
+                                            alignof(UpdateScoreRequest));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull UpdateScoreRequest::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_UpdateScoreRequest_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &UpdateScoreRequest::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<UpdateScoreRequest>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &UpdateScoreRequest::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<UpdateScoreRequest>(), &UpdateScoreRequest::ByteSizeLong,
+            &UpdateScoreRequest::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_._cached_size_),
+        false,
+    },
+    &UpdateScoreRequest::kDescriptorMethods,
+    &descriptor_table_game_5fservice_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* UpdateScoreRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> UpdateScoreRequest::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::game::UpdateScoreRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 score = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UpdateScoreRequest, _impl_.score_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_.score_)}},
+    // int32 user_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UpdateScoreRequest, _impl_.user_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_.user_id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 user_id = 1;
+    {PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_.user_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 score = 2;
+    {PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_.score_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void UpdateScoreRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.UpdateScoreRequest)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.user_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.score_) -
+      reinterpret_cast<char*>(&_impl_.user_id_)) + sizeof(_impl_.score_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* UpdateScoreRequest::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const UpdateScoreRequest& this_ = static_cast<const UpdateScoreRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* UpdateScoreRequest::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const UpdateScoreRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:game.UpdateScoreRequest)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 user_id = 1;
+          if (this_._internal_user_id() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_user_id(), target);
+          }
+
+          // int32 score = 2;
+          if (this_._internal_score() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_score(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:game.UpdateScoreRequest)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t UpdateScoreRequest::ByteSizeLong(const MessageLite& base) {
+          const UpdateScoreRequest& this_ = static_cast<const UpdateScoreRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t UpdateScoreRequest::ByteSizeLong() const {
+          const UpdateScoreRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:game.UpdateScoreRequest)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // int32 user_id = 1;
+            if (this_._internal_user_id() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_user_id());
+            }
+            // int32 score = 2;
+            if (this_._internal_score() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_score());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void UpdateScoreRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<UpdateScoreRequest*>(&to_msg);
+  auto& from = static_cast<const UpdateScoreRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.UpdateScoreRequest)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_user_id() != 0) {
+    _this->_impl_.user_id_ = from._impl_.user_id_;
+  }
+  if (from._internal_score() != 0) {
+    _this->_impl_.score_ = from._impl_.score_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpdateScoreRequest::CopyFrom(const UpdateScoreRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.UpdateScoreRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void UpdateScoreRequest::InternalSwap(UpdateScoreRequest* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_.score_)
+      + sizeof(UpdateScoreRequest::_impl_.score_)
+      - PROTOBUF_FIELD_OFFSET(UpdateScoreRequest, _impl_.user_id_)>(
+          reinterpret_cast<char*>(&_impl_.user_id_),
+          reinterpret_cast<char*>(&other->_impl_.user_id_));
+}
+
+::google::protobuf::Metadata UpdateScoreRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class UpdateScoreResponse::_Internal {
+ public:
+};
+
+UpdateScoreResponse::UpdateScoreResponse(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:game.UpdateScoreResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateScoreResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::game::UpdateScoreResponse& from_msg)
+      : message_(arena, from.message_),
+        _cached_size_{0} {}
+
+UpdateScoreResponse::UpdateScoreResponse(
+    ::google::protobuf::Arena* arena,
+    const UpdateScoreResponse& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  UpdateScoreResponse* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, success_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, success_),
+           offsetof(Impl_, new_score_) -
+               offsetof(Impl_, success_) +
+               sizeof(Impl_::new_score_));
+
+  // @@protoc_insertion_point(copy_constructor:game.UpdateScoreResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE UpdateScoreResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : message_(arena),
+        _cached_size_{0} {}
+
+inline void UpdateScoreResponse::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, success_),
+           0,
+           offsetof(Impl_, new_score_) -
+               offsetof(Impl_, success_) +
+               sizeof(Impl_::new_score_));
+}
+UpdateScoreResponse::~UpdateScoreResponse() {
+  // @@protoc_insertion_point(destructor:game.UpdateScoreResponse)
+  SharedDtor(*this);
+}
+inline void UpdateScoreResponse::SharedDtor(MessageLite& self) {
+  UpdateScoreResponse& this_ = static_cast<UpdateScoreResponse&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.message_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* UpdateScoreResponse::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) UpdateScoreResponse(arena);
+}
+constexpr auto UpdateScoreResponse::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(UpdateScoreResponse),
+                                            alignof(UpdateScoreResponse));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull UpdateScoreResponse::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_UpdateScoreResponse_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &UpdateScoreResponse::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<UpdateScoreResponse>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &UpdateScoreResponse::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<UpdateScoreResponse>(), &UpdateScoreResponse::ByteSizeLong,
+            &UpdateScoreResponse::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_._cached_size_),
+        false,
+    },
+    &UpdateScoreResponse::kDescriptorMethods,
+    &descriptor_table_game_5fservice_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* UpdateScoreResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 40, 2> UpdateScoreResponse::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::game::UpdateScoreResponse>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(UpdateScoreResponse, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.success_)}},
+    // string message = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.message_)}},
+    // int32 new_score = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(UpdateScoreResponse, _impl_.new_score_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.new_score_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool success = 1;
+    {PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.success_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+    // string message = 2;
+    {PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.message_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 new_score = 3;
+    {PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.new_score_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+    "\30\0\7\0\0\0\0\0"
+    "game.UpdateScoreResponse"
+    "message"
+  }},
+};
+
+PROTOBUF_NOINLINE void UpdateScoreResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.UpdateScoreResponse)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.message_.ClearToEmpty();
+  ::memset(&_impl_.success_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.new_score_) -
+      reinterpret_cast<char*>(&_impl_.success_)) + sizeof(_impl_.new_score_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* UpdateScoreResponse::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const UpdateScoreResponse& this_ = static_cast<const UpdateScoreResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* UpdateScoreResponse::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const UpdateScoreResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:game.UpdateScoreResponse)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool success = 1;
+          if (this_._internal_success() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_success(), target);
+          }
+
+          // string message = 2;
+          if (!this_._internal_message().empty()) {
+            const std::string& _s = this_._internal_message();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.UpdateScoreResponse.message");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          // int32 new_score = 3;
+          if (this_._internal_new_score() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_new_score(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:game.UpdateScoreResponse)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t UpdateScoreResponse::ByteSizeLong(const MessageLite& base) {
+          const UpdateScoreResponse& this_ = static_cast<const UpdateScoreResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t UpdateScoreResponse::ByteSizeLong() const {
+          const UpdateScoreResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:game.UpdateScoreResponse)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string message = 2;
+            if (!this_._internal_message().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_message());
+            }
+            // bool success = 1;
+            if (this_._internal_success() != 0) {
+              total_size += 2;
+            }
+            // int32 new_score = 3;
+            if (this_._internal_new_score() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_new_score());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void UpdateScoreResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<UpdateScoreResponse*>(&to_msg);
+  auto& from = static_cast<const UpdateScoreResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.UpdateScoreResponse)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_message().empty()) {
+    _this->_internal_set_message(from._internal_message());
+  }
+  if (from._internal_success() != 0) {
+    _this->_impl_.success_ = from._impl_.success_;
+  }
+  if (from._internal_new_score() != 0) {
+    _this->_impl_.new_score_ = from._impl_.new_score_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UpdateScoreResponse::CopyFrom(const UpdateScoreResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.UpdateScoreResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void UpdateScoreResponse::InternalSwap(UpdateScoreResponse* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.message_, &other->_impl_.message_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.new_score_)
+      + sizeof(UpdateScoreResponse::_impl_.new_score_)
+      - PROTOBUF_FIELD_OFFSET(UpdateScoreResponse, _impl_.success_)>(
+          reinterpret_cast<char*>(&_impl_.success_),
+          reinterpret_cast<char*>(&other->_impl_.success_));
+}
+
+::google::protobuf::Metadata UpdateScoreResponse::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -1757,7 +2062,7 @@ inline PROTOBUF_NDEBUG_INLINE RankingRequest::Impl_::Impl_(
 
 inline void RankingRequest::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.top_n_ = {};
+  _impl_.limit_ = {};
 }
 RankingRequest::~RankingRequest() {
   // @@protoc_insertion_point(destructor:game.RankingRequest)
@@ -1824,14 +2129,14 @@ const ::_pbi::TcParseTable<0, 1, 0, 0, 2> RankingRequest::_table_ = {
     ::_pbi::TcParser::GetTable<::game::RankingRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 top_n = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingRequest, _impl_.top_n_), 63>(),
-     {8, 63, 0, PROTOBUF_FIELD_OFFSET(RankingRequest, _impl_.top_n_)}},
+    // int32 limit = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingRequest, _impl_.limit_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(RankingRequest, _impl_.limit_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 top_n = 1;
-    {PROTOBUF_FIELD_OFFSET(RankingRequest, _impl_.top_n_), 0, 0,
+    // int32 limit = 1;
+    {PROTOBUF_FIELD_OFFSET(RankingRequest, _impl_.limit_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
@@ -1846,7 +2151,7 @@ PROTOBUF_NOINLINE void RankingRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.top_n_ = 0;
+  _impl_.limit_ = 0;
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -1865,11 +2170,11 @@ PROTOBUF_NOINLINE void RankingRequest::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // int32 top_n = 1;
-          if (this_._internal_top_n() != 0) {
+          // int32 limit = 1;
+          if (this_._internal_limit() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
                 WriteInt32ToArrayWithField<1>(
-                    stream, this_._internal_top_n(), target);
+                    stream, this_._internal_limit(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -1896,10 +2201,10 @@ PROTOBUF_NOINLINE void RankingRequest::Clear() {
           (void)cached_has_bits;
 
            {
-            // int32 top_n = 1;
-            if (this_._internal_top_n() != 0) {
+            // int32 limit = 1;
+            if (this_._internal_limit() != 0) {
               total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_top_n());
+                  this_._internal_limit());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1914,8 +2219,8 @@ void RankingRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_top_n() != 0) {
-    _this->_impl_.top_n_ = from._impl_.top_n_;
+  if (from._internal_limit() != 0) {
+    _this->_impl_.limit_ = from._impl_.limit_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1931,10 +2236,327 @@ void RankingRequest::CopyFrom(const RankingRequest& from) {
 void RankingRequest::InternalSwap(RankingRequest* PROTOBUF_RESTRICT other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-        swap(_impl_.top_n_, other->_impl_.top_n_);
+        swap(_impl_.limit_, other->_impl_.limit_);
 }
 
 ::google::protobuf::Metadata RankingRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class RankingResponse_RankingEntry::_Internal {
+ public:
+};
+
+RankingResponse_RankingEntry::RankingResponse_RankingEntry(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:game.RankingResponse.RankingEntry)
+}
+inline PROTOBUF_NDEBUG_INLINE RankingResponse_RankingEntry::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::game::RankingResponse_RankingEntry& from_msg)
+      : username_(arena, from.username_),
+        _cached_size_{0} {}
+
+RankingResponse_RankingEntry::RankingResponse_RankingEntry(
+    ::google::protobuf::Arena* arena,
+    const RankingResponse_RankingEntry& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  RankingResponse_RankingEntry* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, rank_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, rank_),
+           offsetof(Impl_, score_) -
+               offsetof(Impl_, rank_) +
+               sizeof(Impl_::score_));
+
+  // @@protoc_insertion_point(copy_constructor:game.RankingResponse.RankingEntry)
+}
+inline PROTOBUF_NDEBUG_INLINE RankingResponse_RankingEntry::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : username_(arena),
+        _cached_size_{0} {}
+
+inline void RankingResponse_RankingEntry::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, rank_),
+           0,
+           offsetof(Impl_, score_) -
+               offsetof(Impl_, rank_) +
+               sizeof(Impl_::score_));
+}
+RankingResponse_RankingEntry::~RankingResponse_RankingEntry() {
+  // @@protoc_insertion_point(destructor:game.RankingResponse.RankingEntry)
+  SharedDtor(*this);
+}
+inline void RankingResponse_RankingEntry::SharedDtor(MessageLite& self) {
+  RankingResponse_RankingEntry& this_ = static_cast<RankingResponse_RankingEntry&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.username_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* RankingResponse_RankingEntry::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) RankingResponse_RankingEntry(arena);
+}
+constexpr auto RankingResponse_RankingEntry::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(RankingResponse_RankingEntry),
+                                            alignof(RankingResponse_RankingEntry));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull RankingResponse_RankingEntry::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_RankingResponse_RankingEntry_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &RankingResponse_RankingEntry::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<RankingResponse_RankingEntry>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &RankingResponse_RankingEntry::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<RankingResponse_RankingEntry>(), &RankingResponse_RankingEntry::ByteSizeLong,
+            &RankingResponse_RankingEntry::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_._cached_size_),
+        false,
+    },
+    &RankingResponse_RankingEntry::kDescriptorMethods,
+    &descriptor_table_game_5fservice_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* RankingResponse_RankingEntry::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 0, 50, 2> RankingResponse_RankingEntry::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::game::RankingResponse_RankingEntry>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // int32 score = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingResponse_RankingEntry, _impl_.score_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.score_)}},
+    // int32 rank = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingResponse_RankingEntry, _impl_.rank_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.rank_)}},
+    // int32 user_id = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingResponse_RankingEntry, _impl_.user_id_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.user_id_)}},
+    // string username = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.username_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 rank = 1;
+    {PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.rank_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 user_id = 2;
+    {PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.user_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string username = 3;
+    {PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.username_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 score = 4;
+    {PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.score_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+    "\41\0\0\10\0\0\0\0"
+    "game.RankingResponse.RankingEntry"
+    "username"
+  }},
+};
+
+PROTOBUF_NOINLINE void RankingResponse_RankingEntry::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.RankingResponse.RankingEntry)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.username_.ClearToEmpty();
+  ::memset(&_impl_.rank_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.score_) -
+      reinterpret_cast<char*>(&_impl_.rank_)) + sizeof(_impl_.score_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* RankingResponse_RankingEntry::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const RankingResponse_RankingEntry& this_ = static_cast<const RankingResponse_RankingEntry&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* RankingResponse_RankingEntry::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const RankingResponse_RankingEntry& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:game.RankingResponse.RankingEntry)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // int32 rank = 1;
+          if (this_._internal_rank() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<1>(
+                    stream, this_._internal_rank(), target);
+          }
+
+          // int32 user_id = 2;
+          if (this_._internal_user_id() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_user_id(), target);
+          }
+
+          // string username = 3;
+          if (!this_._internal_username().empty()) {
+            const std::string& _s = this_._internal_username();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.RankingResponse.RankingEntry.username");
+            target = stream->WriteStringMaybeAliased(3, _s, target);
+          }
+
+          // int32 score = 4;
+          if (this_._internal_score() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<4>(
+                    stream, this_._internal_score(), target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:game.RankingResponse.RankingEntry)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t RankingResponse_RankingEntry::ByteSizeLong(const MessageLite& base) {
+          const RankingResponse_RankingEntry& this_ = static_cast<const RankingResponse_RankingEntry&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t RankingResponse_RankingEntry::ByteSizeLong() const {
+          const RankingResponse_RankingEntry& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:game.RankingResponse.RankingEntry)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string username = 3;
+            if (!this_._internal_username().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_username());
+            }
+            // int32 rank = 1;
+            if (this_._internal_rank() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_rank());
+            }
+            // int32 user_id = 2;
+            if (this_._internal_user_id() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_user_id());
+            }
+            // int32 score = 4;
+            if (this_._internal_score() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_score());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void RankingResponse_RankingEntry::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<RankingResponse_RankingEntry*>(&to_msg);
+  auto& from = static_cast<const RankingResponse_RankingEntry&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.RankingResponse.RankingEntry)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_username().empty()) {
+    _this->_internal_set_username(from._internal_username());
+  }
+  if (from._internal_rank() != 0) {
+    _this->_impl_.rank_ = from._impl_.rank_;
+  }
+  if (from._internal_user_id() != 0) {
+    _this->_impl_.user_id_ = from._impl_.user_id_;
+  }
+  if (from._internal_score() != 0) {
+    _this->_impl_.score_ = from._impl_.score_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void RankingResponse_RankingEntry::CopyFrom(const RankingResponse_RankingEntry& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.RankingResponse.RankingEntry)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void RankingResponse_RankingEntry::InternalSwap(RankingResponse_RankingEntry* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.score_)
+      + sizeof(RankingResponse_RankingEntry::_impl_.score_)
+      - PROTOBUF_FIELD_OFFSET(RankingResponse_RankingEntry, _impl_.rank_)>(
+          reinterpret_cast<char*>(&_impl_.rank_),
+          reinterpret_cast<char*>(&other->_impl_.rank_));
+}
+
+::google::protobuf::Metadata RankingResponse_RankingEntry::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -1955,7 +2577,7 @@ RankingResponse::RankingResponse(::google::protobuf::Arena* arena)
 inline PROTOBUF_NDEBUG_INLINE RankingResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::game::RankingResponse& from_msg)
-      : username_(arena, from.username_),
+      : rankings_{visibility, arena, from.rankings_},
         _cached_size_{0} {}
 
 RankingResponse::RankingResponse(
@@ -1971,30 +2593,17 @@ RankingResponse::RankingResponse(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, score_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, score_),
-           offsetof(Impl_, rank_) -
-               offsetof(Impl_, score_) +
-               sizeof(Impl_::rank_));
 
   // @@protoc_insertion_point(copy_constructor:game.RankingResponse)
 }
 inline PROTOBUF_NDEBUG_INLINE RankingResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : username_(arena),
+      : rankings_{visibility, arena},
         _cached_size_{0} {}
 
 inline void RankingResponse::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, score_),
-           0,
-           offsetof(Impl_, rank_) -
-               offsetof(Impl_, score_) +
-               sizeof(Impl_::rank_));
 }
 RankingResponse::~RankingResponse() {
   // @@protoc_insertion_point(destructor:game.RankingResponse)
@@ -2004,7 +2613,6 @@ inline void RankingResponse::SharedDtor(MessageLite& self) {
   RankingResponse& this_ = static_cast<RankingResponse&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.username_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -2013,8 +2621,20 @@ inline void* RankingResponse::PlacementNew_(const void*, void* mem,
   return ::new (mem) RankingResponse(arena);
 }
 constexpr auto RankingResponse::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(RankingResponse),
-                                            alignof(RankingResponse));
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.rankings_) +
+          decltype(RankingResponse::_impl_.rankings_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(RankingResponse), alignof(RankingResponse), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&RankingResponse::PlacementNew_,
+                                 sizeof(RankingResponse),
+                                 alignof(RankingResponse));
+  }
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
@@ -2044,17 +2664,17 @@ const ::google::protobuf::internal::ClassData* RankingResponse::GetClassData() c
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 37, 2> RankingResponse::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> RankingResponse::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294967294,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -2062,34 +2682,18 @@ const ::_pbi::TcParseTable<2, 3, 0, 37, 2> RankingResponse::_table_ = {
     ::_pbi::TcParser::GetTable<::game::RankingResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // string username = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.username_)}},
-    // int32 score = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingResponse, _impl_.score_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.score_)}},
-    // int32 rank = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RankingResponse, _impl_.rank_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.rank_)}},
+    // repeated .game.RankingResponse.RankingEntry rankings = 1;
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.rankings_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // string username = 1;
-    {PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.username_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int32 score = 2;
-    {PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.score_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // int32 rank = 3;
-    {PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.rank_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-    "\24\10\0\0\0\0\0\0"
-    "game.RankingResponse"
-    "username"
+    // repeated .game.RankingResponse.RankingEntry rankings = 1;
+    {PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.rankings_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::game::RankingResponse_RankingEntry>()},
+  }}, {{
   }},
 };
 
@@ -2100,10 +2704,7 @@ PROTOBUF_NOINLINE void RankingResponse::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.username_.ClearToEmpty();
-  ::memset(&_impl_.score_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.rank_) -
-      reinterpret_cast<char*>(&_impl_.score_)) + sizeof(_impl_.rank_));
+  _impl_.rankings_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -2122,26 +2723,15 @@ PROTOBUF_NOINLINE void RankingResponse::Clear() {
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // string username = 1;
-          if (!this_._internal_username().empty()) {
-            const std::string& _s = this_._internal_username();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "game.RankingResponse.username");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // int32 score = 2;
-          if (this_._internal_score() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
-                    stream, this_._internal_score(), target);
-          }
-
-          // int32 rank = 3;
-          if (this_._internal_rank() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<3>(
-                    stream, this_._internal_rank(), target);
+          // repeated .game.RankingResponse.RankingEntry rankings = 1;
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_rankings_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_rankings().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    1, repfield, repfield.GetCachedSize(),
+                    target, stream);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -2169,20 +2759,12 @@ PROTOBUF_NOINLINE void RankingResponse::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // string username = 1;
-            if (!this_._internal_username().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_username());
-            }
-            // int32 score = 2;
-            if (this_._internal_score() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_score());
-            }
-            // int32 rank = 3;
-            if (this_._internal_rank() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_rank());
+            // repeated .game.RankingResponse.RankingEntry rankings = 1;
+            {
+              total_size += 1UL * this_._internal_rankings_size();
+              for (const auto& msg : this_._internal_rankings()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -2197,15 +2779,8 @@ void RankingResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_username().empty()) {
-    _this->_internal_set_username(from._internal_username());
-  }
-  if (from._internal_score() != 0) {
-    _this->_impl_.score_ = from._impl_.score_;
-  }
-  if (from._internal_rank() != 0) {
-    _this->_impl_.rank_ = from._impl_.rank_;
-  }
+  _this->_internal_mutable_rankings()->MergeFrom(
+      from._internal_rankings());
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -2219,16 +2794,8 @@ void RankingResponse::CopyFrom(const RankingResponse& from) {
 
 void RankingResponse::InternalSwap(RankingResponse* PROTOBUF_RESTRICT other) {
   using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.username_, &other->_impl_.username_, arena);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.rank_)
-      + sizeof(RankingResponse::_impl_.rank_)
-      - PROTOBUF_FIELD_OFFSET(RankingResponse, _impl_.score_)>(
-          reinterpret_cast<char*>(&_impl_.score_),
-          reinterpret_cast<char*>(&other->_impl_.score_));
+  _impl_.rankings_.InternalSwap(&other->_impl_.rankings_);
 }
 
 ::google::protobuf::Metadata RankingResponse::GetMetadata() const {

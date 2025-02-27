@@ -15,18 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PostgreSQL_Connection.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CRUD_PostgreSQL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameServer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\game_service.grpc.pb.cc">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_service.pb.cc">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game_service.grpc.pb.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_service.pb.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

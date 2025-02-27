@@ -114,12 +114,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pqxx.lib;libpq.lib;grpc++.lib;grpc.lib;grpc++_reflection.lib;protobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>pqxx.lib;libpq.lib;grpc++.lib;grpc.lib;grpc++_reflection.lib;libprotobufd.lib;libprotobuf-lited.lib;libprotocd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,10 +146,12 @@
   <ItemGroup>
     <ClCompile Include="CRUD_PostgreSQL.cpp" />
     <ClCompile Include="GameServer.cpp" />
-    <ClCompile Include="PostgreSQL_Connection.cpp" />
+    <ClCompile Include="src\game_service.grpc.pb.cc" />
+    <ClCompile Include="src\game_service.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game_service.grpc.pb.h" />
+    <ClInclude Include="src\game_service.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

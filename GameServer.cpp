@@ -1,7 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include <thread>
+#include <format>
 #include <grpcpp/grpcpp.h>
 #include <pqxx/pqxx>
 #include "game_service.grpc.pb.h"
@@ -14,22 +14,46 @@ using namespace game;
 
 class GameServiceImpl final : public GameService::Service {
 private:
-    pqxx::connection* db_conn;
+    std::unique_ptr<pqxx::connection> db_conn;
 
 public:
-    GameServiceImpl(pqxx::connection* conn) : db_conn(conn) {}
+    GameServiceImpl() {
+        try {
+            db_conn = std::make_unique<pqxx::connection>(
+                "dbname=gamedb "
+                "user=devuser "
+                "password=3567 "
+                "hostaddr=127.0.0.1 "
+                "port=5432"
+            );
+            std::cout << "Database connection successful" << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cerr << "Database connection failed: " << e.what() << std::endl;
+            throw;
+        }
+    }
 
-    Status GetUser(ServerContext* context, const UserRequest* request, UserResponse* response) override {
+    Status GetUser(ServerContext* context, const UserRequest* request,
+        UserResponse* response) override {
         try {
             pqxx::work txn(*db_conn);
-            pqxx::result res = txn.exec_prepared("get_user", request->user_id());
 
-            if (res.empty()) {
+            // 매개변수를 문자열로 변환
+            std::string query = "SELECT user_id, username, score, created_at "
+                "FROM users WHERE user_id = " +
+                txn.quote(request->user_id());
+
+            auto result = txn.exec(query);
+            if (result.empty()) {
                 return Status(grpc::StatusCode::NOT_FOUND, "User not found");
             }
 
-            response->set_username(res[0]["username"].c_str());
-            response->set_score(res[0]["score"].as<int>());
+            const auto& row = result[0];
+            response->set_user_id(row["user_id"].as<int>());
+            response->set_username(row["username"].as<std::string>());
+            response->set_score(row["score"].as<int>());
+            response->set_created_at(row["created_at"].as<std::string>());
 
             return Status::OK;
         }
@@ -38,14 +62,21 @@ public:
         }
     }
 
-    Status AddUser(ServerContext* context, const User* request, ResponseMessage* response) override {
+    Status AddUser(ServerContext* context, const AddUserRequest* request,
+        AddUserResponse* response) override {
         try {
             pqxx::work txn(*db_conn);
-            pqxx::result result = txn.exec_prepared("add_user", request->username());
 
+            std::string query = "INSERT INTO users (username, score) VALUES (" +
+                txn.quote(request->username()) + ", 0) RETURNING user_id";
+
+            auto result = txn.exec(query);
             txn.commit();
+
             response->set_success(true);
-            response->set_message("User added successfully");
+            response->set_message("User created successfully");
+            response->set_user_id(result[0]["user_id"].as<int>());
+
             return Status::OK;
         }
         catch (const std::exception& e) {
@@ -53,14 +84,56 @@ public:
         }
     }
 
-    Status UpdateScore(ServerContext* context, const ScoreRequest* request, ResponseMessage* response) override {
+    Status UpdateScore(ServerContext* context, const UpdateScoreRequest* request,
+        UpdateScoreResponse* response) override {
         try {
             pqxx::work txn(*db_conn);
-            pqxx::result result = txn.exec_prepared("update_score", request->user_id(), request->score());
+
+            std::string query = "UPDATE users SET score = " +
+                txn.quote(request->score()) +
+                " WHERE user_id = " +
+                txn.quote(request->user_id()) +
+                " RETURNING score";
+
+            auto result = txn.exec(query);
+            if (result.empty()) {
+                return Status(grpc::StatusCode::NOT_FOUND, "User not found");
+            }
 
             txn.commit();
+
             response->set_success(true);
             response->set_message("Score updated successfully");
+            response->set_new_score(result[0]["score"].as<int>());
+
+            return Status::OK;
+        }
+        catch (const std::exception& e) {
+            return Status(grpc::StatusCode::INTERNAL, e.what());
+        }
+    }
+
+    Status GetRanking(ServerContext* context, const RankingRequest* request,
+        RankingResponse* response) override {
+        try {
+            pqxx::work txn(*db_conn);
+
+            std::string query = "SELECT user_id, username, score, "
+                "RANK() OVER (ORDER BY score DESC) as rank "
+                "FROM users "
+                "ORDER BY score DESC "
+                "LIMIT " + txn.quote(request->limit());
+
+            auto result = txn.exec(query);
+
+            for (const auto& row : result) {
+                auto entry = response->add_rankings();
+                entry->set_rank(row["rank"].as<int>());
+                entry->set_user_id(row["user_id"].as<int>());
+                entry->set_username(row["username"].as<std::string>());
+                entry->set_score(row["score"].as<int>());
+            }
+
             return Status::OK;
         }
         catch (const std::exception& e) {
@@ -69,29 +142,26 @@ public:
     }
 };
 
-void RunServer(pqxx::connection* db_conn) {
+void RunServer() {
     std::string server_address("0.0.0.0:50051");
-    GameServiceImpl service(db_conn);
+    GameServiceImpl service;
 
     ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
     builder.RegisterService(&service);
 
     std::unique_ptr<Server> server(builder.BuildAndStart());
-    std::cout << "gRPC 서버 실행 중... " << server_address << std::endl;
+    std::cout << "Server listening on " << server_address << std::endl;
     server->Wait();
 }
 
 int main() {
     try {
-        pqxx::connection db_conn("dbname=mydb user=devuser password=3567 hostaddr=127.0.0.1 port=5432");
-        std::cout << "PostgreSQL 연결 성공!" << std::endl;
-
-        RunServer(&db_conn);
+        RunServer();
+        return 0;
     }
     catch (const std::exception& e) {
-        std::cerr << "오류 발생: " << e.what() << std::endl;
+        std::cerr << "Server error: " << e.what() << std::endl;
         return 1;
     }
-    return 0;
 }
