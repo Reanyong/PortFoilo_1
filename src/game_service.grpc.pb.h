@@ -35,6 +35,7 @@ class GameService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
+    // 유저 정보를 가져오는 RPC
     virtual ::grpc::Status GetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::UserResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>> AsyncGetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>>(AsyncGetUserRaw(context, request, cq));
@@ -42,6 +43,7 @@ class GameService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>> PrepareAsyncGetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>>(PrepareAsyncGetUserRaw(context, request, cq));
     }
+    // 유저를 추가하는 RPC
     virtual ::grpc::Status AddUser(::grpc::ClientContext* context, const ::game::User& request, ::game::ResponseMessage* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>> AsyncAddUser(::grpc::ClientContext* context, const ::game::User& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>>(AsyncAddUserRaw(context, request, cq));
@@ -49,6 +51,7 @@ class GameService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>> PrepareAsyncAddUser(::grpc::ClientContext* context, const ::game::User& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>>(PrepareAsyncAddUserRaw(context, request, cq));
     }
+    // 점수를 업데이트하는 RPC
     virtual ::grpc::Status UpdateScore(::grpc::ClientContext* context, const ::game::ScoreRequest& request, ::game::ResponseMessage* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>> AsyncUpdateScore(::grpc::ClientContext* context, const ::game::ScoreRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>>(AsyncUpdateScoreRaw(context, request, cq));
@@ -56,6 +59,7 @@ class GameService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>> PrepareAsyncUpdateScore(::grpc::ClientContext* context, const ::game::ScoreRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ResponseMessage>>(PrepareAsyncUpdateScoreRaw(context, request, cq));
     }
+    // 랭킹을 스트리밍하는 RPC
     std::unique_ptr< ::grpc::ClientReaderInterface< ::game::RankingResponse>> StreamRankings(::grpc::ClientContext* context, const ::game::RankingRequest& request) {
       return std::unique_ptr< ::grpc::ClientReaderInterface< ::game::RankingResponse>>(StreamRankingsRaw(context, request));
     }
@@ -68,12 +72,16 @@ class GameService final {
     class async_interface {
      public:
       virtual ~async_interface() {}
+      // 유저 정보를 가져오는 RPC
       virtual void GetUser(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::UserResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetUser(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::UserResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 유저를 추가하는 RPC
       virtual void AddUser(::grpc::ClientContext* context, const ::game::User* request, ::game::ResponseMessage* response, std::function<void(::grpc::Status)>) = 0;
       virtual void AddUser(::grpc::ClientContext* context, const ::game::User* request, ::game::ResponseMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 점수를 업데이트하는 RPC
       virtual void UpdateScore(::grpc::ClientContext* context, const ::game::ScoreRequest* request, ::game::ResponseMessage* response, std::function<void(::grpc::Status)>) = 0;
       virtual void UpdateScore(::grpc::ClientContext* context, const ::game::ScoreRequest* request, ::game::ResponseMessage* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 랭킹을 스트리밍하는 RPC
       virtual void StreamRankings(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::grpc::ClientReadReactor< ::game::RankingResponse>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
@@ -164,9 +172,13 @@ class GameService final {
    public:
     Service();
     virtual ~Service();
+    // 유저 정보를 가져오는 RPC
     virtual ::grpc::Status GetUser(::grpc::ServerContext* context, const ::game::UserRequest* request, ::game::UserResponse* response);
+    // 유저를 추가하는 RPC
     virtual ::grpc::Status AddUser(::grpc::ServerContext* context, const ::game::User* request, ::game::ResponseMessage* response);
+    // 점수를 업데이트하는 RPC
     virtual ::grpc::Status UpdateScore(::grpc::ServerContext* context, const ::game::ScoreRequest* request, ::game::ResponseMessage* response);
+    // 랭킹을 스트리밍하는 RPC
     virtual ::grpc::Status StreamRankings(::grpc::ServerContext* context, const ::game::RankingRequest* request, ::grpc::ServerWriter< ::game::RankingResponse>* writer);
   };
   template <class BaseClass>

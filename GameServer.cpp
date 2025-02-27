@@ -23,12 +23,13 @@ public:
         try {
             pqxx::work txn(*db_conn);
             pqxx::result res = txn.exec_prepared("get_user", request->user_id());
+
             if (res.empty()) {
                 return Status(grpc::StatusCode::NOT_FOUND, "User not found");
             }
-            pqxx::result result = txn.exec(txn.prepared("get_user")(request->user_id()));
-            pqxx::result result = txn.exec(txn.prepared("add_user")(request->username()));
-            pqxx::result result = txn.exec(txn.prepared("update_score")(request->user_id(), request->score()));
+
+            response->set_username(res[0]["username"].c_str());
+            response->set_score(res[0]["score"].as<int>());
 
             return Status::OK;
         }
@@ -40,7 +41,7 @@ public:
     Status AddUser(ServerContext* context, const User* request, ResponseMessage* response) override {
         try {
             pqxx::work txn(*db_conn);
-            pqxx::result result = txn.exec(txn.prepared("get_user")(request->user_id()));
+            pqxx::result result = txn.exec_prepared("add_user", request->username());
 
             txn.commit();
             response->set_success(true);
@@ -55,13 +56,11 @@ public:
     Status UpdateScore(ServerContext* context, const ScoreRequest* request, ResponseMessage* response) override {
         try {
             pqxx::work txn(*db_conn);
-            pqxx::result result = txn.exec(txn.prepared("get_user")(request->user_id()));
-            if (result.empty()) {
-                return Status(grpc::StatusCode::NOT_FOUND, "User not found");
-            }
+            pqxx::result result = txn.exec_prepared("update_score", request->user_id(), request->score());
+
             txn.commit();
             response->set_success(true);
-            response->set_message("Score updated");
+            response->set_message("Score updated successfully");
             return Status::OK;
         }
         catch (const std::exception& e) {
