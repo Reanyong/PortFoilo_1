@@ -148,6 +148,7 @@ public:
 
 void PrintLogo() {
 #ifdef _WIN32
+
     SetConsoleOutputCP(CP_UTF8);
 #endif
 
@@ -186,6 +187,7 @@ void RunServer() {
 }
 
 int main() {
+    std::locale::global(std::locale("ko_KR.UTF-8"));
     try {
         PrintLogo();
         LoadingEffect();

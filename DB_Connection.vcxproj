@@ -24,6 +24,7 @@
     <ProjectGuid>{f437f3c1-627d-4e47-9d38-81ca37cecb67}</ProjectGuid>
     <RootNamespace>DBConnection</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>postgreSQL_Connection</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,13 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CRUD_PostgreSQL.cpp" />
-    <ClCompile Include="GameServer.cpp" />
-    <ClCompile Include="src\game_service.grpc.pb.cc" />
-    <ClCompile Include="src\game_service.pb.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\game_service.grpc.pb.h" />
-    <ClInclude Include="src\game_service.pb.h" />
+    <ClCompile Include="PostgreSQL_Connection.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
