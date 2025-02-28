@@ -1,10 +1,14 @@
-#include <iostream>
+﻿#include <iostream>
 #include <memory>
 #include <string>
 #include <format>
 #include <grpcpp/grpcpp.h>
 #include <pqxx/pqxx>
 #include "game_service.grpc.pb.h"
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -20,7 +24,7 @@ public:
     GameServiceImpl() {
         try {
             db_conn = std::make_unique<pqxx::connection>(
-                "dbname=gamedb "
+                "dbname=game_db "
                 "user=devuser "
                 "password=3567 "
                 "hostaddr=127.0.0.1 "
@@ -39,7 +43,7 @@ public:
         try {
             pqxx::work txn(*db_conn);
 
-            // �Ű������� ���ڿ��� ��ȯ
+            // 매개변수를 문자열로 변환
             std::string query = "SELECT user_id, username, score, created_at "
                 "FROM users WHERE user_id = " +
                 txn.quote(request->user_id());
@@ -142,6 +146,32 @@ public:
     }
 };
 
+void PrintLogo() {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+    std::string logo = R"(
+      ██╗      █████╗ ███╗   ██╗ ██████╗ ███████╗
+      ██║     ██╔══██╗████╗  ██║██╔════╝║██║ 
+      ██║     ███████║██╔██╗ ██║██║     ║███████╗
+      ██║     ██╔══██║██║╚██╗██║██║     ║██║ 
+      ███████╗██║  ██║██║ ╚████║╚██████╗║███████╗
+      ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
+    )";
+
+    std::cout << logo << std::endl;
+}
+
+void LoadingEffect() {
+    const char* animation = "|/-\\";
+    for (int i = 0; i < 10; i++) {
+        std::cout << "\rServer is starting... " << animation[i % 4] << std::flush;
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    }
+    std::cout << "\rServer started!            " << std::endl;
+}
+
 void RunServer() {
     std::string server_address("0.0.0.0:50051");
     GameServiceImpl service;
@@ -157,6 +187,8 @@ void RunServer() {
 
 int main() {
     try {
+        PrintLogo();
+        LoadingEffect();
         RunServer();
         return 0;
     }
