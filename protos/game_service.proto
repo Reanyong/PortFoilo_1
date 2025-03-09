@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package game;
+
+service GameService {
+  // 유저 관리
+  rpc GetUser(UserRequest) returns (UserResponse);
+  rpc AddUser(NewUser) returns (UserResponse);
+  
+  // 점수 & 랭킹
+  rpc UpdateScore(ScoreUpdate) returns (ScoreResponse);
+  rpc GetRanking(RankingRequest) returns (RankingResponse);
+  
+  // 매치메이킹
+  rpc JoinMatchmaking(UserRequest) returns (MatchmakingResponse);
+  rpc GetMatchmakingStatus(UserRequest) returns (MatchmakingResponse);
+  
+  // 게임 세션 관리
+  rpc CreateGameSession(GameSessionRequest) returns (GameSessionResponse);
+  rpc GetGameSessions(RegionRequest) returns (GameSessionsResponse);
+  
+  // 전투 로그
+  rpc LogBattle(BattleLogRequest) returns (BattleLogResponse);
+  rpc GetBattleLogs(UserRequest) returns (BattleLogsResponse);
+}
+
+// 기본 요청 타입
+message Empty {}
+
+// 유저 요청 & 응답
+message UserRequest {
+  string user_id = 1;
+}
+
+message NewUser {
+  string username = 1;
+  string email = 2;
+}
+
+message UserResponse {
+  string user_id = 1;
+  string username = 2;
+  string email = 3;
+  string created_at = 4;
+  bool success = 5;
+  string message = 6;
+}
+
+// 점수 업데이트
+message ScoreUpdate {
+  string user_id = 1;
+  int32 score = 2;
+}
+
+message ScoreResponse {
+  string user_id = 1;
+  int32 new_score = 2;
+  bool success = 3;
+  string message = 4;
+}
+
+// 랭킹 조회
+message RankingRequest {
+  int32 limit = 1;
+}
+
+message RankingEntry {
+  string user_id = 1;
+  string username = 2;
+  int32 rank = 3;
+  int32 score = 4;
+}
+
+message RankingResponse {
+  repeated RankingEntry rankings = 1;
+}
+
+// 매치메이킹
+message MatchmakingResponse {
+  string user_id = 1;
+  string status = 2;
+  string created_at = 3;
+}
+
+// 게임 세션 관리
+message GameSessionRequest {
+  string region = 1;
+  string event_type = 2;
+  string event_data = 3;
+}
+
+message GameSessionResponse {
+  string session_id = 1;
+  string region = 2;
+  string created_at = 3;
+}
+
+message RegionRequest {
+  string region = 1;
+}
+
+message GameSessionsResponse {
+  repeated GameSessionResponse sessions = 1;
+}
+
+// 전투 로그
+message BattleLogRequest {
+  string match_id = 1;
+  string user_id = 2;
+  string target_id = 3;
+  string weapon = 4;
+  int32 damage = 5;
+}
+
+message BattleLogResponse {
+  int32 log_id = 1;
+  string created_at = 2;
+}
+
+message BattleLogsResponse {
+  repeated BattleLog logs = 1;
+}
+
+message BattleLog {
+  int32 log_id = 1;
+  string match_id = 2;
+  string user_id = 3;
+  string target_id = 4;
+  string weapon = 5;
+  int32 damage = 6;
+  string created_at = 7;
+}
