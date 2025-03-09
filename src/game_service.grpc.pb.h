@@ -27,7 +27,6 @@
 
 namespace game {
 
-// 서비스 정의
 class GameService final {
  public:
   static constexpr char const* service_full_name() {
@@ -36,7 +35,7 @@ class GameService final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    // 유저 정보 조회
+    // 유저 관리
     virtual ::grpc::Status GetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::UserResponse* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>> AsyncGetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>>(AsyncGetUserRaw(context, request, cq));
@@ -44,45 +43,61 @@ class GameService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>> PrepareAsyncGetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>>(PrepareAsyncGetUserRaw(context, request, cq));
     }
-    // 새 유저 추가
-    virtual ::grpc::Status AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::game::AddUserResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::AddUserResponse>> AsyncAddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::AddUserResponse>>(AsyncAddUserRaw(context, request, cq));
+    virtual ::grpc::Status AddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::game::UserResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>> AsyncAddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>>(AsyncAddUserRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::AddUserResponse>> PrepareAsyncAddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::AddUserResponse>>(PrepareAsyncAddUserRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>> PrepareAsyncAddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>>(PrepareAsyncAddUserRaw(context, request, cq));
     }
-    // 점수 업데이트
-    virtual ::grpc::Status UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::game::UpdateScoreResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UpdateScoreResponse>> AsyncUpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UpdateScoreResponse>>(AsyncUpdateScoreRaw(context, request, cq));
+    // 점수 & 랭킹
+    virtual ::grpc::Status UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::game::ScoreResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ScoreResponse>> AsyncUpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ScoreResponse>>(AsyncUpdateScoreRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UpdateScoreResponse>> PrepareAsyncUpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::UpdateScoreResponse>>(PrepareAsyncUpdateScoreRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ScoreResponse>> PrepareAsyncUpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::ScoreResponse>>(PrepareAsyncUpdateScoreRaw(context, request, cq));
     }
-    // 랭킹 조회
-    virtual ::grpc::Status GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::game::RankingResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::RankingResponse>> AsyncGetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::RankingResponse>>(AsyncGetRankingRaw(context, request, cq));
+    virtual ::grpc::Status GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::game::LeaderboardResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::LeaderboardResponse>> AsyncGetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::LeaderboardResponse>>(AsyncGetLeaderboardRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::RankingResponse>> PrepareAsyncGetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::RankingResponse>>(PrepareAsyncGetRankingRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::LeaderboardResponse>> PrepareAsyncGetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::LeaderboardResponse>>(PrepareAsyncGetLeaderboardRaw(context, request, cq));
+    }
+    // 매치메이킹
+    virtual ::grpc::Status JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::MatchmakingResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>> AsyncJoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>>(AsyncJoinMatchmakingRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>> PrepareAsyncJoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>>(PrepareAsyncJoinMatchmakingRaw(context, request, cq));
+    }
+    virtual ::grpc::Status GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::MatchmakingResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>> AsyncGetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>>(AsyncGetMatchmakingStatusRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>> PrepareAsyncGetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>>(PrepareAsyncGetMatchmakingStatusRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      // 유저 정보 조회
+      // 유저 관리
       virtual void GetUser(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::UserResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetUser(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::UserResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      // 새 유저 추가
-      virtual void AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      // 점수 업데이트
-      virtual void UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      // 랭킹 조회
-      virtual void GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void AddUser(::grpc::ClientContext* context, const ::game::NewUser* request, ::game::UserResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void AddUser(::grpc::ClientContext* context, const ::game::NewUser* request, ::game::UserResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 점수 & 랭킹
+      virtual void UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // 매치메이킹
+      virtual void JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -90,12 +105,16 @@ class GameService final {
    private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>* AsyncGetUserRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>* PrepareAsyncGetUserRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::AddUserResponse>* AsyncAddUserRaw(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::AddUserResponse>* PrepareAsyncAddUserRaw(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::UpdateScoreResponse>* AsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::UpdateScoreResponse>* PrepareAsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::RankingResponse>* AsyncGetRankingRaw(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::RankingResponse>* PrepareAsyncGetRankingRaw(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>* AsyncAddUserRaw(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::UserResponse>* PrepareAsyncAddUserRaw(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::ScoreResponse>* AsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::ScoreResponse>* PrepareAsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::LeaderboardResponse>* AsyncGetLeaderboardRaw(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::LeaderboardResponse>* PrepareAsyncGetLeaderboardRaw(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>* AsyncJoinMatchmakingRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>* PrepareAsyncJoinMatchmakingRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>* AsyncGetMatchmakingStatusRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::game::MatchmakingResponse>* PrepareAsyncGetMatchmakingStatusRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -107,38 +126,56 @@ class GameService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UserResponse>> PrepareAsyncGetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UserResponse>>(PrepareAsyncGetUserRaw(context, request, cq));
     }
-    ::grpc::Status AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::game::AddUserResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>> AsyncAddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>>(AsyncAddUserRaw(context, request, cq));
+    ::grpc::Status AddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::game::UserResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UserResponse>> AsyncAddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UserResponse>>(AsyncAddUserRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>> PrepareAsyncAddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>>(PrepareAsyncAddUserRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UserResponse>> PrepareAsyncAddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UserResponse>>(PrepareAsyncAddUserRaw(context, request, cq));
     }
-    ::grpc::Status UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::game::UpdateScoreResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>> AsyncUpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>>(AsyncUpdateScoreRaw(context, request, cq));
+    ::grpc::Status UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::game::ScoreResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>> AsyncUpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>>(AsyncUpdateScoreRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>> PrepareAsyncUpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>>(PrepareAsyncUpdateScoreRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>> PrepareAsyncUpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>>(PrepareAsyncUpdateScoreRaw(context, request, cq));
     }
-    ::grpc::Status GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::game::RankingResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::RankingResponse>> AsyncGetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::RankingResponse>>(AsyncGetRankingRaw(context, request, cq));
+    ::grpc::Status GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::game::LeaderboardResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>> AsyncGetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>>(AsyncGetLeaderboardRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::RankingResponse>> PrepareAsyncGetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::RankingResponse>>(PrepareAsyncGetRankingRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>> PrepareAsyncGetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>>(PrepareAsyncGetLeaderboardRaw(context, request, cq));
+    }
+    ::grpc::Status JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::MatchmakingResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>> AsyncJoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>>(AsyncJoinMatchmakingRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>> PrepareAsyncJoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>>(PrepareAsyncJoinMatchmakingRaw(context, request, cq));
+    }
+    ::grpc::Status GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::MatchmakingResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>> AsyncGetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>>(AsyncGetMatchmakingStatusRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>> PrepareAsyncGetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>>(PrepareAsyncGetMatchmakingStatusRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
       void GetUser(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::UserResponse* response, std::function<void(::grpc::Status)>) override;
       void GetUser(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::UserResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response, std::function<void(::grpc::Status)>) override;
-      void AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response, std::function<void(::grpc::Status)>) override;
-      void UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response, std::function<void(::grpc::Status)>) override;
-      void GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void AddUser(::grpc::ClientContext* context, const ::game::NewUser* request, ::game::UserResponse* response, std::function<void(::grpc::Status)>) override;
+      void AddUser(::grpc::ClientContext* context, const ::game::NewUser* request, ::game::UserResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response, std::function<void(::grpc::Status)>) override;
+      void UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response, std::function<void(::grpc::Status)>) override;
+      void GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, std::function<void(::grpc::Status)>) override;
+      void JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, std::function<void(::grpc::Status)>) override;
+      void GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -152,16 +189,22 @@ class GameService final {
     class async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::game::UserResponse>* AsyncGetUserRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::game::UserResponse>* PrepareAsyncGetUserRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>* AsyncAddUserRaw(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>* PrepareAsyncAddUserRaw(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>* AsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>* PrepareAsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::game::RankingResponse>* AsyncGetRankingRaw(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::game::RankingResponse>* PrepareAsyncGetRankingRaw(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::UserResponse>* AsyncAddUserRaw(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::UserResponse>* PrepareAsyncAddUserRaw(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>* AsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>* PrepareAsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>* AsyncGetLeaderboardRaw(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>* PrepareAsyncGetLeaderboardRaw(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* AsyncJoinMatchmakingRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* PrepareAsyncJoinMatchmakingRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* AsyncGetMatchmakingStatusRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* PrepareAsyncGetMatchmakingStatusRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_GetUser_;
     const ::grpc::internal::RpcMethod rpcmethod_AddUser_;
     const ::grpc::internal::RpcMethod rpcmethod_UpdateScore_;
-    const ::grpc::internal::RpcMethod rpcmethod_GetRanking_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetLeaderboard_;
+    const ::grpc::internal::RpcMethod rpcmethod_JoinMatchmaking_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetMatchmakingStatus_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -169,14 +212,15 @@ class GameService final {
    public:
     Service();
     virtual ~Service();
-    // 유저 정보 조회
+    // 유저 관리
     virtual ::grpc::Status GetUser(::grpc::ServerContext* context, const ::game::UserRequest* request, ::game::UserResponse* response);
-    // 새 유저 추가
-    virtual ::grpc::Status AddUser(::grpc::ServerContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response);
-    // 점수 업데이트
-    virtual ::grpc::Status UpdateScore(::grpc::ServerContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response);
-    // 랭킹 조회
-    virtual ::grpc::Status GetRanking(::grpc::ServerContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response);
+    virtual ::grpc::Status AddUser(::grpc::ServerContext* context, const ::game::NewUser* request, ::game::UserResponse* response);
+    // 점수 & 랭킹
+    virtual ::grpc::Status UpdateScore(::grpc::ServerContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response);
+    virtual ::grpc::Status GetLeaderboard(::grpc::ServerContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response);
+    // 매치메이킹
+    virtual ::grpc::Status JoinMatchmaking(::grpc::ServerContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response);
+    virtual ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_GetUser : public BaseClass {
@@ -210,11 +254,11 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/) override {
+    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestAddUser(::grpc::ServerContext* context, ::game::AddUserRequest* request, ::grpc::ServerAsyncResponseWriter< ::game::AddUserResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestAddUser(::grpc::ServerContext* context, ::game::NewUser* request, ::grpc::ServerAsyncResponseWriter< ::game::UserResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -230,35 +274,75 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/) override {
+    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestUpdateScore(::grpc::ServerContext* context, ::game::UpdateScoreRequest* request, ::grpc::ServerAsyncResponseWriter< ::game::UpdateScoreResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestUpdateScore(::grpc::ServerContext* context, ::game::ScoreUpdate* request, ::grpc::ServerAsyncResponseWriter< ::game::ScoreResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_GetRanking : public BaseClass {
+  class WithAsyncMethod_GetLeaderboard : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_GetRanking() {
+    WithAsyncMethod_GetLeaderboard() {
       ::grpc::Service::MarkMethodAsync(3);
     }
-    ~WithAsyncMethod_GetRanking() override {
+    ~WithAsyncMethod_GetLeaderboard() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetRanking(::grpc::ServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/) override {
+    ::grpc::Status GetLeaderboard(::grpc::ServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetRanking(::grpc::ServerContext* context, ::game::RankingRequest* request, ::grpc::ServerAsyncResponseWriter< ::game::RankingResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetLeaderboard(::grpc::ServerContext* context, ::game::Empty* request, ::grpc::ServerAsyncResponseWriter< ::game::LeaderboardResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_GetUser<WithAsyncMethod_AddUser<WithAsyncMethod_UpdateScore<WithAsyncMethod_GetRanking<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_JoinMatchmaking : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_JoinMatchmaking() {
+      ::grpc::Service::MarkMethodAsync(4);
+    }
+    ~WithAsyncMethod_JoinMatchmaking() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status JoinMatchmaking(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestJoinMatchmaking(::grpc::ServerContext* context, ::game::UserRequest* request, ::grpc::ServerAsyncResponseWriter< ::game::MatchmakingResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_GetMatchmakingStatus : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_GetMatchmakingStatus() {
+      ::grpc::Service::MarkMethodAsync(5);
+    }
+    ~WithAsyncMethod_GetMatchmakingStatus() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetMatchmakingStatus(::grpc::ServerContext* context, ::game::UserRequest* request, ::grpc::ServerAsyncResponseWriter< ::game::MatchmakingResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_GetUser<WithAsyncMethod_AddUser<WithAsyncMethod_UpdateScore<WithAsyncMethod_GetLeaderboard<WithAsyncMethod_JoinMatchmaking<WithAsyncMethod_GetMatchmakingStatus<Service > > > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_GetUser : public BaseClass {
    private:
@@ -293,25 +377,25 @@ class GameService final {
    public:
     WithCallbackMethod_AddUser() {
       ::grpc::Service::MarkMethodCallback(1,
-          new ::grpc::internal::CallbackUnaryHandler< ::game::AddUserRequest, ::game::AddUserResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::game::NewUser, ::game::UserResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response) { return this->AddUser(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::game::NewUser* request, ::game::UserResponse* response) { return this->AddUser(context, request, response); }));}
     void SetMessageAllocatorFor_AddUser(
-        ::grpc::MessageAllocator< ::game::AddUserRequest, ::game::AddUserResponse>* allocator) {
+        ::grpc::MessageAllocator< ::game::NewUser, ::game::UserResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::AddUserRequest, ::game::AddUserResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::NewUser, ::game::UserResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_AddUser() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/) override {
+    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* AddUser(
-      ::grpc::CallbackServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_UpdateScore : public BaseClass {
@@ -320,54 +404,108 @@ class GameService final {
    public:
     WithCallbackMethod_UpdateScore() {
       ::grpc::Service::MarkMethodCallback(2,
-          new ::grpc::internal::CallbackUnaryHandler< ::game::UpdateScoreRequest, ::game::UpdateScoreResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::game::ScoreUpdate, ::game::ScoreResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response) { return this->UpdateScore(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response) { return this->UpdateScore(context, request, response); }));}
     void SetMessageAllocatorFor_UpdateScore(
-        ::grpc::MessageAllocator< ::game::UpdateScoreRequest, ::game::UpdateScoreResponse>* allocator) {
+        ::grpc::MessageAllocator< ::game::ScoreUpdate, ::game::ScoreResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::UpdateScoreRequest, ::game::UpdateScoreResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::ScoreUpdate, ::game::ScoreResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_UpdateScore() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/) override {
+    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* UpdateScore(
-      ::grpc::CallbackServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_GetRanking : public BaseClass {
+  class WithCallbackMethod_GetLeaderboard : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_GetRanking() {
+    WithCallbackMethod_GetLeaderboard() {
       ::grpc::Service::MarkMethodCallback(3,
-          new ::grpc::internal::CallbackUnaryHandler< ::game::RankingRequest, ::game::RankingResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::game::Empty, ::game::LeaderboardResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response) { return this->GetRanking(context, request, response); }));}
-    void SetMessageAllocatorFor_GetRanking(
-        ::grpc::MessageAllocator< ::game::RankingRequest, ::game::RankingResponse>* allocator) {
+                   ::grpc::CallbackServerContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response) { return this->GetLeaderboard(context, request, response); }));}
+    void SetMessageAllocatorFor_GetLeaderboard(
+        ::grpc::MessageAllocator< ::game::Empty, ::game::LeaderboardResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::RankingRequest, ::game::RankingResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::Empty, ::game::LeaderboardResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~WithCallbackMethod_GetRanking() override {
+    ~WithCallbackMethod_GetLeaderboard() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetRanking(::grpc::ServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/) override {
+    ::grpc::Status GetLeaderboard(::grpc::ServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* GetRanking(
-      ::grpc::CallbackServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerUnaryReactor* GetLeaderboard(
+      ::grpc::CallbackServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_GetUser<WithCallbackMethod_AddUser<WithCallbackMethod_UpdateScore<WithCallbackMethod_GetRanking<Service > > > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_JoinMatchmaking : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_JoinMatchmaking() {
+      ::grpc::Service::MarkMethodCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::game::UserRequest, ::game::MatchmakingResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response) { return this->JoinMatchmaking(context, request, response); }));}
+    void SetMessageAllocatorFor_JoinMatchmaking(
+        ::grpc::MessageAllocator< ::game::UserRequest, ::game::MatchmakingResponse>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::UserRequest, ::game::MatchmakingResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_JoinMatchmaking() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status JoinMatchmaking(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* JoinMatchmaking(
+      ::grpc::CallbackServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_GetMatchmakingStatus : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_GetMatchmakingStatus() {
+      ::grpc::Service::MarkMethodCallback(5,
+          new ::grpc::internal::CallbackUnaryHandler< ::game::UserRequest, ::game::MatchmakingResponse>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response) { return this->GetMatchmakingStatus(context, request, response); }));}
+    void SetMessageAllocatorFor_GetMatchmakingStatus(
+        ::grpc::MessageAllocator< ::game::UserRequest, ::game::MatchmakingResponse>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::game::UserRequest, ::game::MatchmakingResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_GetMatchmakingStatus() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* GetMatchmakingStatus(
+      ::grpc::CallbackServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_GetUser<WithCallbackMethod_AddUser<WithCallbackMethod_UpdateScore<WithCallbackMethod_GetLeaderboard<WithCallbackMethod_JoinMatchmaking<WithCallbackMethod_GetMatchmakingStatus<Service > > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_GetUser : public BaseClass {
@@ -398,7 +536,7 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/) override {
+    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -415,24 +553,58 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/) override {
+    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_GetRanking : public BaseClass {
+  class WithGenericMethod_GetLeaderboard : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_GetRanking() {
+    WithGenericMethod_GetLeaderboard() {
       ::grpc::Service::MarkMethodGeneric(3);
     }
-    ~WithGenericMethod_GetRanking() override {
+    ~WithGenericMethod_GetLeaderboard() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetRanking(::grpc::ServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/) override {
+    ::grpc::Status GetLeaderboard(::grpc::ServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_JoinMatchmaking : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_JoinMatchmaking() {
+      ::grpc::Service::MarkMethodGeneric(4);
+    }
+    ~WithGenericMethod_JoinMatchmaking() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status JoinMatchmaking(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_GetMatchmakingStatus : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_GetMatchmakingStatus() {
+      ::grpc::Service::MarkMethodGeneric(5);
+    }
+    ~WithGenericMethod_GetMatchmakingStatus() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -469,7 +641,7 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/) override {
+    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -489,7 +661,7 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/) override {
+    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -498,23 +670,63 @@ class GameService final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_GetRanking : public BaseClass {
+  class WithRawMethod_GetLeaderboard : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_GetRanking() {
+    WithRawMethod_GetLeaderboard() {
       ::grpc::Service::MarkMethodRaw(3);
     }
-    ~WithRawMethod_GetRanking() override {
+    ~WithRawMethod_GetLeaderboard() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetRanking(::grpc::ServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/) override {
+    ::grpc::Status GetLeaderboard(::grpc::ServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGetRanking(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGetLeaderboard(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_JoinMatchmaking : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_JoinMatchmaking() {
+      ::grpc::Service::MarkMethodRaw(4);
+    }
+    ~WithRawMethod_JoinMatchmaking() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status JoinMatchmaking(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestJoinMatchmaking(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_GetMatchmakingStatus : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_GetMatchmakingStatus() {
+      ::grpc::Service::MarkMethodRaw(5);
+    }
+    ~WithRawMethod_GetMatchmakingStatus() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetMatchmakingStatus(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -554,7 +766,7 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/) override {
+    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -576,7 +788,7 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/) override {
+    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -584,25 +796,69 @@ class GameService final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_GetRanking : public BaseClass {
+  class WithRawCallbackMethod_GetLeaderboard : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_GetRanking() {
+    WithRawCallbackMethod_GetLeaderboard() {
       ::grpc::Service::MarkMethodRawCallback(3,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetRanking(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetLeaderboard(context, request, response); }));
     }
-    ~WithRawCallbackMethod_GetRanking() override {
+    ~WithRawCallbackMethod_GetLeaderboard() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status GetRanking(::grpc::ServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/) override {
+    ::grpc::Status GetLeaderboard(::grpc::ServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* GetRanking(
+    virtual ::grpc::ServerUnaryReactor* GetLeaderboard(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_JoinMatchmaking : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_JoinMatchmaking() {
+      ::grpc::Service::MarkMethodRawCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->JoinMatchmaking(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_JoinMatchmaking() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status JoinMatchmaking(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* JoinMatchmaking(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_GetMatchmakingStatus : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_GetMatchmakingStatus() {
+      ::grpc::Service::MarkMethodRawCallback(5,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->GetMatchmakingStatus(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_GetMatchmakingStatus() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* GetMatchmakingStatus(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -640,10 +896,10 @@ class GameService final {
     WithStreamedUnaryMethod_AddUser() {
       ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::game::AddUserRequest, ::game::AddUserResponse>(
+          ::game::NewUser, ::game::UserResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::game::AddUserRequest, ::game::AddUserResponse>* streamer) {
+                     ::game::NewUser, ::game::UserResponse>* streamer) {
                        return this->StreamedAddUser(context,
                          streamer);
                   }));
@@ -652,12 +908,12 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::AddUserRequest* /*request*/, ::game::AddUserResponse* /*response*/) override {
+    ::grpc::Status AddUser(::grpc::ServerContext* /*context*/, const ::game::NewUser* /*request*/, ::game::UserResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedAddUser(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::AddUserRequest,::game::AddUserResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedAddUser(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::NewUser,::game::UserResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_UpdateScore : public BaseClass {
@@ -667,10 +923,10 @@ class GameService final {
     WithStreamedUnaryMethod_UpdateScore() {
       ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::game::UpdateScoreRequest, ::game::UpdateScoreResponse>(
+          ::game::ScoreUpdate, ::game::ScoreResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::game::UpdateScoreRequest, ::game::UpdateScoreResponse>* streamer) {
+                     ::game::ScoreUpdate, ::game::ScoreResponse>* streamer) {
                        return this->StreamedUpdateScore(context,
                          streamer);
                   }));
@@ -679,43 +935,97 @@ class GameService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::UpdateScoreRequest* /*request*/, ::game::UpdateScoreResponse* /*response*/) override {
+    ::grpc::Status UpdateScore(::grpc::ServerContext* /*context*/, const ::game::ScoreUpdate* /*request*/, ::game::ScoreResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedUpdateScore(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::UpdateScoreRequest,::game::UpdateScoreResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedUpdateScore(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::ScoreUpdate,::game::ScoreResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_GetRanking : public BaseClass {
+  class WithStreamedUnaryMethod_GetLeaderboard : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_GetRanking() {
+    WithStreamedUnaryMethod_GetLeaderboard() {
       ::grpc::Service::MarkMethodStreamed(3,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::game::RankingRequest, ::game::RankingResponse>(
+          ::game::Empty, ::game::LeaderboardResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::game::RankingRequest, ::game::RankingResponse>* streamer) {
-                       return this->StreamedGetRanking(context,
+                     ::game::Empty, ::game::LeaderboardResponse>* streamer) {
+                       return this->StreamedGetLeaderboard(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_GetRanking() override {
+    ~WithStreamedUnaryMethod_GetLeaderboard() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status GetRanking(::grpc::ServerContext* /*context*/, const ::game::RankingRequest* /*request*/, ::game::RankingResponse* /*response*/) override {
+    ::grpc::Status GetLeaderboard(::grpc::ServerContext* /*context*/, const ::game::Empty* /*request*/, ::game::LeaderboardResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGetRanking(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::RankingRequest,::game::RankingResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedGetLeaderboard(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::Empty,::game::LeaderboardResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_GetUser<WithStreamedUnaryMethod_AddUser<WithStreamedUnaryMethod_UpdateScore<WithStreamedUnaryMethod_GetRanking<Service > > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_JoinMatchmaking : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_JoinMatchmaking() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::game::UserRequest, ::game::MatchmakingResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::game::UserRequest, ::game::MatchmakingResponse>* streamer) {
+                       return this->StreamedJoinMatchmaking(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_JoinMatchmaking() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status JoinMatchmaking(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedJoinMatchmaking(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::UserRequest,::game::MatchmakingResponse>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetMatchmakingStatus : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_GetMatchmakingStatus() {
+      ::grpc::Service::MarkMethodStreamed(5,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::game::UserRequest, ::game::MatchmakingResponse>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::game::UserRequest, ::game::MatchmakingResponse>* streamer) {
+                       return this->StreamedGetMatchmakingStatus(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_GetMatchmakingStatus() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetMatchmakingStatus(::grpc::ServerContext* /*context*/, const ::game::UserRequest* /*request*/, ::game::MatchmakingResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetMatchmakingStatus(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::game::UserRequest,::game::MatchmakingResponse>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_GetUser<WithStreamedUnaryMethod_AddUser<WithStreamedUnaryMethod_UpdateScore<WithStreamedUnaryMethod_GetLeaderboard<WithStreamedUnaryMethod_JoinMatchmaking<WithStreamedUnaryMethod_GetMatchmakingStatus<Service > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_GetUser<WithStreamedUnaryMethod_AddUser<WithStreamedUnaryMethod_UpdateScore<WithStreamedUnaryMethod_GetRanking<Service > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_GetUser<WithStreamedUnaryMethod_AddUser<WithStreamedUnaryMethod_UpdateScore<WithStreamedUnaryMethod_GetLeaderboard<WithStreamedUnaryMethod_JoinMatchmaking<WithStreamedUnaryMethod_GetMatchmakingStatus<Service > > > > > > StreamedService;
 };
 
 }  // namespace game

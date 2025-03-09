@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package matchmaking;
+
+service MatchmakingService {
+  // 매치메이킹
+  rpc JoinMatchmaking(JoinRequest) returns (MatchmakingResponse);
+  rpc CancelMatchmaking(CancelRequest) returns (MatchmakingResponse);
+  rpc GetMatchmakingStatus(StatusRequest) returns (MatchmakingResponse);
+  
+  // MMR 관련
+  rpc UpdateMMR(MMRUpdate) returns (MMRResponse);
+  rpc GetMMR(MMRRequest) returns (MMRResponse);
+}
+
+// 매치메이킹 참가 요청
+message JoinRequest {
+  string user_id = 1;
+  string game_mode = 2; // battlefield, deathmatch 등
+  string region = 3;    // 선호 지역
+}
+
+// 매치메이킹 취소 요청
+message CancelRequest {
+  string user_id = 1;
+}
+
+// 매치메이킹 상태 요청
+message StatusRequest {
+  string user_id = 1;
+}
+
+// 매치메이킹 응답
+message MatchmakingResponse {
+  string user_id = 1;
+  string status = 2; // waiting, matched, cancelled
+  string match_id = 3; // 매치가 성사된 경우
+  string server_address = 4; // 매치 서버 주소
+  string created_at = 5;
+  int32 estimated_wait_time = 6; // 예상 대기 시간(초)
+  bool success = 7;
+  string message = 8;
+}
+
+// MMR 요청
+message MMRRequest {
+  string user_id = 1;
+}
+
+// MMR 업데이트
+message MMRUpdate {
+  string user_id = 1;
+  float mmr = 2;
+  string match_id = 3;
+  bool is_win = 4;
+  int32 score = 5;
+}
+
+// MMR 응답
+message MMRResponse {
+  string user_id = 1;
+  float mmr = 2;
+  int32 rank = 3;
+  bool success = 4;
+  string message = 5;
+}

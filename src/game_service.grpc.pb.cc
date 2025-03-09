@@ -25,7 +25,9 @@ static const char* GameService_method_names[] = {
   "/game.GameService/GetUser",
   "/game.GameService/AddUser",
   "/game.GameService/UpdateScore",
-  "/game.GameService/GetRanking",
+  "/game.GameService/GetLeaderboard",
+  "/game.GameService/JoinMatchmaking",
+  "/game.GameService/GetMatchmakingStatus",
 };
 
 std::unique_ptr< GameService::Stub> GameService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -38,7 +40,9 @@ GameService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   : channel_(channel), rpcmethod_GetUser_(GameService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_AddUser_(GameService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_UpdateScore_(GameService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_GetRanking_(GameService_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetLeaderboard_(GameService_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_JoinMatchmaking_(GameService_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetMatchmakingStatus_(GameService_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status GameService::Stub::GetUser(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::UserResponse* response) {
@@ -64,71 +68,117 @@ void GameService::Stub::async::GetUser(::grpc::ClientContext* context, const ::g
   return result;
 }
 
-::grpc::Status GameService::Stub::AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::game::AddUserResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::game::AddUserRequest, ::game::AddUserResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_AddUser_, context, request, response);
+::grpc::Status GameService::Stub::AddUser(::grpc::ClientContext* context, const ::game::NewUser& request, ::game::UserResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::game::NewUser, ::game::UserResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_AddUser_, context, request, response);
 }
 
-void GameService::Stub::async::AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::game::AddUserRequest, ::game::AddUserResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AddUser_, context, request, response, std::move(f));
+void GameService::Stub::async::AddUser(::grpc::ClientContext* context, const ::game::NewUser* request, ::game::UserResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::game::NewUser, ::game::UserResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AddUser_, context, request, response, std::move(f));
 }
 
-void GameService::Stub::async::AddUser(::grpc::ClientContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+void GameService::Stub::async::AddUser(::grpc::ClientContext* context, const ::game::NewUser* request, ::game::UserResponse* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_AddUser_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>* GameService::Stub::PrepareAsyncAddUserRaw(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::AddUserResponse, ::game::AddUserRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_AddUser_, context, request);
+::grpc::ClientAsyncResponseReader< ::game::UserResponse>* GameService::Stub::PrepareAsyncAddUserRaw(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::UserResponse, ::game::NewUser, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_AddUser_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::game::AddUserResponse>* GameService::Stub::AsyncAddUserRaw(::grpc::ClientContext* context, const ::game::AddUserRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::game::UserResponse>* GameService::Stub::AsyncAddUserRaw(::grpc::ClientContext* context, const ::game::NewUser& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncAddUserRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status GameService::Stub::UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::game::UpdateScoreResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::game::UpdateScoreRequest, ::game::UpdateScoreResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_UpdateScore_, context, request, response);
+::grpc::Status GameService::Stub::UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::game::ScoreResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::game::ScoreUpdate, ::game::ScoreResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_UpdateScore_, context, request, response);
 }
 
-void GameService::Stub::async::UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::game::UpdateScoreRequest, ::game::UpdateScoreResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_UpdateScore_, context, request, response, std::move(f));
+void GameService::Stub::async::UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::game::ScoreUpdate, ::game::ScoreResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_UpdateScore_, context, request, response, std::move(f));
 }
 
-void GameService::Stub::async::UpdateScore(::grpc::ClientContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+void GameService::Stub::async::UpdateScore(::grpc::ClientContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_UpdateScore_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>* GameService::Stub::PrepareAsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::UpdateScoreResponse, ::game::UpdateScoreRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_UpdateScore_, context, request);
+::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>* GameService::Stub::PrepareAsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::ScoreResponse, ::game::ScoreUpdate, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_UpdateScore_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::game::UpdateScoreResponse>* GameService::Stub::AsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::UpdateScoreRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::game::ScoreResponse>* GameService::Stub::AsyncUpdateScoreRaw(::grpc::ClientContext* context, const ::game::ScoreUpdate& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncUpdateScoreRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status GameService::Stub::GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::game::RankingResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::game::RankingRequest, ::game::RankingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetRanking_, context, request, response);
+::grpc::Status GameService::Stub::GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty& request, ::game::LeaderboardResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::game::Empty, ::game::LeaderboardResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetLeaderboard_, context, request, response);
 }
 
-void GameService::Stub::async::GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::game::RankingRequest, ::game::RankingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetRanking_, context, request, response, std::move(f));
+void GameService::Stub::async::GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::game::Empty, ::game::LeaderboardResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetLeaderboard_, context, request, response, std::move(f));
 }
 
-void GameService::Stub::async::GetRanking(::grpc::ClientContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response, ::grpc::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetRanking_, context, request, response, reactor);
+void GameService::Stub::async::GetLeaderboard(::grpc::ClientContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetLeaderboard_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::game::RankingResponse>* GameService::Stub::PrepareAsyncGetRankingRaw(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::RankingResponse, ::game::RankingRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetRanking_, context, request);
+::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>* GameService::Stub::PrepareAsyncGetLeaderboardRaw(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::LeaderboardResponse, ::game::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetLeaderboard_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::game::RankingResponse>* GameService::Stub::AsyncGetRankingRaw(::grpc::ClientContext* context, const ::game::RankingRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::game::LeaderboardResponse>* GameService::Stub::AsyncGetLeaderboardRaw(::grpc::ClientContext* context, const ::game::Empty& request, ::grpc::CompletionQueue* cq) {
   auto* result =
-    this->PrepareAsyncGetRankingRaw(context, request, cq);
+    this->PrepareAsyncGetLeaderboardRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status GameService::Stub::JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::MatchmakingResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::game::UserRequest, ::game::MatchmakingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_JoinMatchmaking_, context, request, response);
+}
+
+void GameService::Stub::async::JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::game::UserRequest, ::game::MatchmakingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_JoinMatchmaking_, context, request, response, std::move(f));
+}
+
+void GameService::Stub::async::JoinMatchmaking(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_JoinMatchmaking_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* GameService::Stub::PrepareAsyncJoinMatchmakingRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::MatchmakingResponse, ::game::UserRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_JoinMatchmaking_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* GameService::Stub::AsyncJoinMatchmakingRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncJoinMatchmakingRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status GameService::Stub::GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest& request, ::game::MatchmakingResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::game::UserRequest, ::game::MatchmakingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetMatchmakingStatus_, context, request, response);
+}
+
+void GameService::Stub::async::GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::game::UserRequest, ::game::MatchmakingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetMatchmakingStatus_, context, request, response, std::move(f));
+}
+
+void GameService::Stub::async::GetMatchmakingStatus(::grpc::ClientContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetMatchmakingStatus_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* GameService::Stub::PrepareAsyncGetMatchmakingStatusRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::game::MatchmakingResponse, ::game::UserRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetMatchmakingStatus_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::game::MatchmakingResponse>* GameService::Stub::AsyncGetMatchmakingStatusRaw(::grpc::ClientContext* context, const ::game::UserRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncGetMatchmakingStatusRaw(context, request, cq);
   result->StartCall();
   return result;
 }
@@ -147,32 +197,52 @@ GameService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GameService_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::AddUserRequest, ::game::AddUserResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::NewUser, ::game::UserResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](GameService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::game::AddUserRequest* req,
-             ::game::AddUserResponse* resp) {
+             const ::game::NewUser* req,
+             ::game::UserResponse* resp) {
                return service->AddUser(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GameService_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::UpdateScoreRequest, ::game::UpdateScoreResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::ScoreUpdate, ::game::ScoreResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](GameService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::game::UpdateScoreRequest* req,
-             ::game::UpdateScoreResponse* resp) {
+             const ::game::ScoreUpdate* req,
+             ::game::ScoreResponse* resp) {
                return service->UpdateScore(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       GameService_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::RankingRequest, ::game::RankingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::Empty, ::game::LeaderboardResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](GameService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::game::RankingRequest* req,
-             ::game::RankingResponse* resp) {
-               return service->GetRanking(ctx, req, resp);
+             const ::game::Empty* req,
+             ::game::LeaderboardResponse* resp) {
+               return service->GetLeaderboard(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      GameService_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::UserRequest, ::game::MatchmakingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](GameService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::game::UserRequest* req,
+             ::game::MatchmakingResponse* resp) {
+               return service->JoinMatchmaking(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      GameService_method_names[5],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< GameService::Service, ::game::UserRequest, ::game::MatchmakingResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](GameService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::game::UserRequest* req,
+             ::game::MatchmakingResponse* resp) {
+               return service->GetMatchmakingStatus(ctx, req, resp);
              }, this)));
 }
 
@@ -186,21 +256,35 @@ GameService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status GameService::Service::AddUser(::grpc::ServerContext* context, const ::game::AddUserRequest* request, ::game::AddUserResponse* response) {
+::grpc::Status GameService::Service::AddUser(::grpc::ServerContext* context, const ::game::NewUser* request, ::game::UserResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status GameService::Service::UpdateScore(::grpc::ServerContext* context, const ::game::UpdateScoreRequest* request, ::game::UpdateScoreResponse* response) {
+::grpc::Status GameService::Service::UpdateScore(::grpc::ServerContext* context, const ::game::ScoreUpdate* request, ::game::ScoreResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status GameService::Service::GetRanking(::grpc::ServerContext* context, const ::game::RankingRequest* request, ::game::RankingResponse* response) {
+::grpc::Status GameService::Service::GetLeaderboard(::grpc::ServerContext* context, const ::game::Empty* request, ::game::LeaderboardResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status GameService::Service::JoinMatchmaking(::grpc::ServerContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status GameService::Service::GetMatchmakingStatus(::grpc::ServerContext* context, const ::game::UserRequest* request, ::game::MatchmakingResponse* response) {
   (void) context;
   (void) request;
   (void) response;
