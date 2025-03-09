@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gRPC_Client", "..\GameClien
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gRPC_Server", "..\GameServer\GameServer.vcxproj", "{A808C0FA-99C7-4F87-91A2-65A000699F68}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatchmakingServer", "..\MatchmakingServer\MatchmakingServer.vcxproj", "{70558993-0D20-4908-B96D-EDBB47B8BC10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -18,7 +20,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F437F3C1-627D-4E47-9D38-81CA37CECB67}.Debug|x64.ActiveCfg = Debug|x64
-		{F437F3C1-627D-4E47-9D38-81CA37CECB67}.Debug|x64.Build.0 = Debug|x64
 		{F437F3C1-627D-4E47-9D38-81CA37CECB67}.Debug|x86.ActiveCfg = Debug|Win32
 		{F437F3C1-627D-4E47-9D38-81CA37CECB67}.Debug|x86.Build.0 = Debug|Win32
 		{F437F3C1-627D-4E47-9D38-81CA37CECB67}.Release|x64.ActiveCfg = Release|x64
@@ -41,6 +42,14 @@ Global
 		{A808C0FA-99C7-4F87-91A2-65A000699F68}.Release|x64.Build.0 = Release|x64
 		{A808C0FA-99C7-4F87-91A2-65A000699F68}.Release|x86.ActiveCfg = Release|Win32
 		{A808C0FA-99C7-4F87-91A2-65A000699F68}.Release|x86.Build.0 = Release|Win32
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Debug|x64.ActiveCfg = Debug|x64
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Debug|x64.Build.0 = Debug|x64
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Debug|x86.ActiveCfg = Debug|Win32
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Debug|x86.Build.0 = Debug|Win32
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Release|x64.ActiveCfg = Release|x64
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Release|x64.Build.0 = Release|x64
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Release|x86.ActiveCfg = Release|Win32
+		{70558993-0D20-4908-B96D-EDBB47B8BC10}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
