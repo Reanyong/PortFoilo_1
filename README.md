@@ -4,8 +4,7 @@
 
 ## **프로젝트 개요**
 이 프로젝트는 **온라인 게임의 백엔드 시스템**을 C++로 구현하여 사용자 관리, 점수 업데이트, 랭킹 시스템 등 핵심 기능을 제공합니다.  
-**gRPC 프레임워크**를 활용하여 **효율적인 클라이언트-서버 통신**을 구축하고,  
-**PostgreSQL 데이터베이스**를 통해 **안정적이고 확장 가능한 백엔드 시스템**을 구현했습니다.  
+**gRPC 프레임워크**를 활용하여 **효율적인 클라이언트-서버 통신**을 구축하고, **PostgreSQL 데이터베이스**를 통해 **안정적이고 확장 가능한 백엔드 시스템**을 구현했습니다.  
 
 ---
 
@@ -13,10 +12,10 @@
 
 | **항목**      | **기술**                                          |
 | ------------ | ------------------------------------------------ |
-| 언어         | C++17                                             |
+| 프로그래밍 언어 | C++17                                             |
 | IDE          | Visual Studio 2022                                |
 | 프레임워크    | gRPC, Protocol Buffers, libpqxx                    |
-| 데이터베이스 | PostgreSQL (WSL Ubuntu 환경)                       |
+| 데이터베이스 | PostgreSQL14.15 (WSL2 Ubuntu 환경)                       |
 | 빌드 관리    | CMake, Visual Studio 프로젝트 시스템               |
 
 ---
@@ -26,7 +25,6 @@
 ### **사용자 관리**
 - 신규 사용자 등록 (`AddUser`)
 - 사용자 정보 조회 (`GetUser`)
-- 안전한 데이터베이스 저장
 
 ### **게임 성적 관리**
 - 사용자 점수 업데이트 (`UpdateScore`)
@@ -44,26 +42,53 @@
 
 ## 📂 **프로젝트 구조**
 ```
-DB_Connection/
-├── protos/
-│   └── game_service.proto     # gRPC 서비스 및 메시지 정의
-├── src/
-│   ├── game_service.pb.h      # 생성된 Protocol Buffers 헤더
-│   ├── game_service.pb.cc     # 생성된 Protocol Buffers 구현
-│   ├── game_service.grpc.pb.h # 생성된 gRPC 서비스 헤더
-│   └── game_service.grpc.pb.cc# 생성된 gRPC 서비스 구현
-├── GameServer.cpp             # 서버 구현
-├── GameClient.cpp             # 클라이언트 구현
-├── CRUD_PostgreSQL.cpp        # 데이터베이스 CRUD 작업
-├── DB_Connection.sln          # Visual Studio 솔루션 파일
-└── DB_Connection.vcxproj      # Visual Studio 프로젝트 파일
+GameBackend/
+├── protos/                             # Protocol Buffers 정의 파일
+│   ├── backend_api.proto               # 백엔드 API 서비스 정의
+│   ├── game_service.proto              # 게임 서비스 정의
+│   └── matchmaking.proto               # 매치메이킹 서비스 정의
+│
+├── src/                                # 생성된 gRPC 소스
+│   ├── backend_api.grpc.pb.cc          # 백엔드 gRPC 서비스 구현
+│   ├── backend_api.grpc.pb.h           # 백엔드 gRPC 서비스 헤더
+│   ├── backend_api.pb.cc               # 백엔드 Protocol Buffers 구현
+│   ├── backend_api.pb.h                # 백엔드 Protocol Buffers 헤더
+│   ├── matchmaking.grpc.pb.cc          # 매치메이킹 gRPC 서비스 구현
+│   ├── matchmaking.grpc.pb.h           # 매치메이킹 gRPC 서비스 헤더
+│   ├── matchmaking.pb.cc               # 매치메이킹 Protocol Buffers 구현
+│   └── matchmaking.pb.h                # 매치메이킹 Protocol Buffers 헤더
+│
+├── gRPC_Server/                        # 백엔드 서버 프로젝트
+│   ├── GameServer.cpp                  # 메인 서버 구현 파일
+│   ├── GameServer.vcxproj              # Visual Studio 프로젝트 파일
+│   └── GameServer.vcxproj.filters      # Visual Studio 프로젝트 필터
+│
+├── gRPC_Client/                        # 클라이언트 프로젝트
+│   ├── GameClient.cpp                  # 메인 클라이언트 구현 파일
+│   ├── GameClient.vcxproj              # Visual Studio 프로젝트 파일
+│   └── GameClient.vcxproj.filters      # Visual Studio 프로젝트 필터
+│
+├── MatchmakingServer/                  # 매치메이킹 서버 프로젝트
+│   ├── MatchmakingServer.cpp           # 매치메이킹 서버 구현 파일
+│   ├── MatchmakingServer.vcxproj       # Visual Studio 프로젝트 파일
+│   └── MatchmakingServer.vcxproj.filters # Visual Studio 프로젝트 필터
+│
+├── postgreSQL_Connection/              # 데이터베이스 연결 프로젝트
+│   ├── CRUD_PostgreSQL.cpp             # 데이터베이스 CRUD 작업
+│   ├── PostgreSQL_Connection.cpp       # 데이터베이스 연결 관리
+│   ├── DB_Connection.vcxproj           # Visual Studio 프로젝트 파일
+│   └── DB_Connection.vcxproj.filters   # Visual Studio 프로젝트 필터
+│
+├── .gitignore                          # Git 무시 파일 목록
+├── .gitattributes                      # Git 속성 파일
+└── Portfolio.sln                       # Visual Studio 솔루션 파일
 ```
 
 ---
 
 ## **구현 세부 사항**
 
-### 📑 **gRPC 서비스 정의 (Protocol Buffers)**
+### **gRPC 서비스 정의 (Protocol Buffers)**
 gRPC를 통해 클라이언트와 서버 간 **효율적인 통신**을 구현했습니다.  
 `game_service.proto` 파일을 통해 **서비스와 메시지 형식**을 정의하여 코드의 자동 생성을 활용했습니다.  
 
@@ -145,7 +170,7 @@ bool GetRanking(int limit) {
 ```
 ---
 ## **시스템 요구사항**
-운영체제: Windows 11 또는 Linux (Ubuntu WSL)
+운영체제: Windows 11 또는 Linux (Ubuntu WSL2)
 IDE: Visual Studio 2019 이상
 데이터베이스: PostgreSQL 14 이상
 컴파일러: C++17 호환 컴파일러
@@ -157,17 +182,17 @@ libpqxx
 ---
 
 ## **향후 계획**
-인증 시스템: JWT 기반 사용자 인증 구현
-로드 밸런싱: 다중 서버 환경에서의 부하 분산 전략 적용
-캐싱 메커니즘: Redis를 활용하여 빈번한 요청에 대한 캐싱 시스템 도입
-로그 시스템: 구조화된 로깅 및 모니터링 시스템 통합
-마이크로서비스 아키텍처: 기능별 독립적인 서비스로 분리
+인증 시스템: JWT 기반 사용자 인증 구현\
+로드 밸런싱: 다중 서버 환경에서의 부하 분산 전략 적용\
+캐싱 메커니즘: Redis를 활용하여 빈번한 요청에 대한 캐싱 시스템 도입\
+로그 시스템: 구조화된 로깅 및 모니터링 시스템 통합\
+마이크로서비스 아키텍처: 기능별 독립적인 서비스로 분리\
 서버 추가 : 채팅 서버(Boost.Asio), 게임 세션 서버(Boost.Asio UDP)
 
 ---
 
 ## **결론**
-이 프로젝트는 고성능 C++ 백엔드 시스템의 설계와 구현에 대한 실질적인 접근 방식을 보여줍니다.
-gRPC와 PostgreSQL의 통합을 통해 안정적이고 확장 가능한 게임 서비스 백엔드를 구현하는 데 중점을 두었으며,
-Modern C++ 기능과 업계 표준 라이브러리를 적극 활용하여 유연하고 유지보수 가능한 코드베이스를 구축했습니다.
-향후 개선 사항을 통해 더 높은 성능과 안정성을 목표로 발전시킬 예정입니다
+이 프로젝트는 고성능 C++ 백엔드 시스템의 설계와 구현에 대한 실질적인 접근 방식을 보여줍니다.\
+gRPC와 PostgreSQL의 통합을 통해 안정적이고 확장 가능한 게임 서비스 백엔드를 구현하는 데 중점을 두었으며,\
+Modern C++ 기능과 업계 표준 라이브러리를 적극 활용하여 유연하고 유지보수 가능한 코드베이스를 구축했습니다.\
+향후 개선 사항을 통해 더 높은 성능과 안정성을 목표로 발전시킬 예정입니다.
